@@ -16,7 +16,11 @@ SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES) $(foreach M,$(MODULES), $($(M)_SRC
 OBJ_DIR	=	OBJS
 OBJS	=	$(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-IFLAGS = $(addprefix -I$(SRC_DIR)/, $(foreach M,$(MODULES), $($(M)_DIR))) -IHEADERS
+RAYLIB_DIR	= vendor/raylib/src
+RAYLIB		= $(RAYLIB_DIR)/librarylib.a
+
+IFLAGS = $(addprefix -I$(SRC_DIR)/, $(foreach M,$(MODULES), $($(M)_DIR))) -I$(RAYLIB_DIR)
+LFLAGS = -L$(RAYLIB_DIR) -lraylib
 
 ##########################################################################################
 
@@ -46,8 +50,8 @@ RMLINE      =   \r\033[K
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(RAYLIB) $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME) $(LFLAGS)
 	@printf "\n$(BOLD)$(YELLOW)$(NAME) successfully compiled\n$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
@@ -75,6 +79,13 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@printf "%d%% $(RESET)\n" $(PERCENT)
 	@printf "Compiling %-34s" $(notdir $@)
 	@$(CXX) $(CXXFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
+$(RAYLIB):
+	@printf "$(YELLOW)Compiling Raylib...$(RESET)\n"
+	@git submodule update --init --recursive
+	@make -C $(RAYLIB_DIR) -s
+	@printf "$(BOLD)$(YELLOW)Raylib successfully compiled$(RESET)\n"
+	@touch $(RAYLIB)
 
 clean:
 	@printf "$(RED)"
