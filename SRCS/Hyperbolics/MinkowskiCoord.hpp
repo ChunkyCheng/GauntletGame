@@ -12,10 +12,12 @@ class	MinkowskiCoord
 		~MinkowskiCoord(void) = default;
 
 		PoincareCoord	toPoincare(void) const;
+		float			hDist(const MinkowskiCoord& other) const;
+		MinkowskiCoord	relativeTo(const MinkowskiCoord& other) const;
 
-		void	setX(float x);
-		void	setY(float y);
-		void	setZ(float z);
+		void	moveXHyperbolic(float dist);
+		void	moveYHyperbolic(float dist);
+		void	setXY(float x, float y);
 		float	x(void) const;
 		float	y(void) const;
 		float	z(void) const;

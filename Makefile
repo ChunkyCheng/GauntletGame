@@ -5,7 +5,11 @@ CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17 #-fsanitize=address
 
 HYPERBOLICS_DIR		= Hyperbolics
 HYPERBOLICS_FILES	= MinkowskiCoord.cpp	PoincareCoord.cpp
-MODULES		=	HYPERBOLICS
+
+ENTITIES_DIR		= Entities
+ENTITIES_FILES		= Entity.cpp
+
+MODULES		=	HYPERBOLICS		ENTITIES
 
 $(foreach M,$(MODULES), $(eval $(M)_SRCS = $(addprefix $($(M)_DIR)/, $($(M)_FILES))))
 
