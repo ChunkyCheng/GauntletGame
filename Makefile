@@ -1,9 +1,11 @@
 NAME	=	HyperLong
 
 CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3 #-fsanitize=address
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17 #-fsanitize=address
 
-MODULES		=
+HYPERBOLICS_DIR		= Hyperbolics
+HYPERBOLICS_FILES	= MinkowskiCoord.cpp	PoincareCoord.cpp
+MODULES		=	HYPERBOLICS
 
 $(foreach M,$(MODULES), $(eval $(M)_SRCS = $(addprefix $($(M)_DIR)/, $($(M)_FILES))))
 
