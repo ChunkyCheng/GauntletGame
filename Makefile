@@ -20,7 +20,7 @@ RAYLIB_DIR	= vendor/raylib/src
 RAYLIB		= $(RAYLIB_DIR)/librarylib.a
 
 IFLAGS = $(addprefix -I$(SRC_DIR)/, $(foreach M,$(MODULES), $($(M)_DIR))) -I$(RAYLIB_DIR)
-LFLAGS = -L$(RAYLIB_DIR) -lraylib
+LFLAGS = -L$(RAYLIB_DIR) -lraylib -lX11
 
 ##########################################################################################
 
