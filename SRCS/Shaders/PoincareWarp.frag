@@ -10,8 +10,8 @@ uniform float		diskRadius;
 vec3	poincareToMinkowski(vec2 poincare)
 {
 	float	r2 = dot(poincare, poincare);
-	//if (r2 >= 1.0)
-	//	discard ;
+	if (r2 >= 1.0)
+		discard ;
 	
 	float	denom = 1.0 - r2;
 	return vec3(
