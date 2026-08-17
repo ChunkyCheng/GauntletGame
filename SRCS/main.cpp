@@ -16,7 +16,9 @@ int	main(void)
 	Entity	dot(0, 0);
 	float	dt = GetFrameTime();
 
+	SetTraceLogLevel(LOG_WARNING);
 	InitWindow(WIN_WIDTH, WIN_HEIGHT, "hyper_long");
+	SetTargetFPS(60);
 	while (!WindowShouldClose())
 	{
 		dt = GetFrameTime() - dt;
