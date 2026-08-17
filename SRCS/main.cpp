@@ -40,7 +40,8 @@ int	main(void)
 			BeginDrawing();
 			ClearBackground(BLACK);
 			DrawCircle(WIN_WIDTH / 2, WIN_HEIGHT / 2, MAP_RADIUS, WHITE);
-			DrawText(playerPos.str().c_str(), 5, 5, 20, RED);
+			DrawFPS(5, 5);
+			DrawText(playerPos.str().c_str(), 5, 30, 20, RED);
 
 			BeginShaderMode(*mapShader);
 			MinkowskiCoord	relative = (dot.pos().relativeTo(player.pos()));
