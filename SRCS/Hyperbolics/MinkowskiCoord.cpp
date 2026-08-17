@@ -21,23 +21,34 @@ float	MinkowskiCoord::hDist(const MinkowskiCoord& other) const
 
 //Finds the first 2 rows of a matrix X such that X(other) = (0, 0, 1)
 //X is then used on this x and y to produce the relative Minkowski coordinate
+//Preserves the x^2 + y^2 + 1 = z^2 relationship
 MinkowskiCoord	MinkowskiCoord::relativeTo(const MinkowskiCoord& other) const
 {
-	float	row1[3] = {
-		1 + other.m_x * other.m_x / (other.m_z + 1),
-		other.m_x * other.m_y / (other.m_z + 1),
-		-other.m_x
-	};
-	float	row2[3] = {
-		other.m_x * other.m_y / (other.m_z + 1),
-		1 + other.m_y * other.m_y / (other.m_z + 1),
-		-other.m_y
-	};
+	Vector3	invRowX = other.inverseRowX();
+	Vector3	invRowY = other.inverseRowY();
 
-	float	x = row1[0] * m_x + row1[1] * m_y + row1[2] * m_z;
-	float	y = row2[0] * m_x + row2[1] * m_y + row2[2] * m_z;
+	float	x = invRowX.x * m_x + invRowX.y * m_y + invRowX.z * m_z;
+	float	y = invRowY.x * m_x + invRowY.y * m_y + invRowY.z * m_z;
 
 	return MinkowskiCoord(x, y);
+}
+
+Vector3	MinkowskiCoord::inverseRowX(void) const
+{
+	return {
+		1 + m_x * m_x / (m_z + 1),
+		m_x * m_y / (m_z + 1),
+		-m_x
+	};	
+}
+
+Vector3	MinkowskiCoord::inverseRowY(void) const
+{
+	return {
+		m_x * m_y / (m_z + 1),
+		1 + m_y * m_y / (m_z + 1),
+		-m_y
+	};
 }
 
 void	MinkowskiCoord::moveXHyperbolic(float dist)

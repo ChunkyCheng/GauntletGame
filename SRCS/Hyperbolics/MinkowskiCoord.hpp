@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "PoincareCoord.hpp"
+#include "raylib.h"
 
 class	MinkowskiCoord
 {
@@ -14,6 +15,8 @@ class	MinkowskiCoord
 		PoincareCoord	toPoincare(void) const;
 		float			hDist(const MinkowskiCoord& other) const;
 		MinkowskiCoord	relativeTo(const MinkowskiCoord& other) const;
+		Vector3			inverseRowX(void) const;
+		Vector3			inverseRowY(void) const;
 
 		void	moveXHyperbolic(float dist);
 		void	moveYHyperbolic(float dist);
