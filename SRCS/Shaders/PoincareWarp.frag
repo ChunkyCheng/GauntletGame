@@ -2,7 +2,7 @@
 
 uniform vec3		objInvFrameRowX;
 uniform vec3		objInvFrameRowY; //RowZ for this matrix is ommited as z is recalculated manually
-uniform sampler2D	texture;
+uniform sampler2D	texture0;
 uniform float		halfExtent;
 uniform vec2		diskCenter;
 uniform float		diskRadius;
@@ -35,7 +35,7 @@ void main(void)
 	if (local.x < 0.0 || local.x > 1.0 || local.y < 0.0 || local.y > 0.0)
 		discard ;
 	
-	vec4	colour = texture2D(texture, local);
+	vec4	colour = texture2D(texture0, local);
 	
 	if (colour.a < 0.01)
 		discard ;
