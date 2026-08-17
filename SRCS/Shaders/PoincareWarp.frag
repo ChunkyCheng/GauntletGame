@@ -1,6 +1,7 @@
 #version 330
 
-uniform mat3		objInvFrame;
+uniform vec3		objInvFrameRowX;
+uniform vec3		objInvFrameRowY; //RowZ for this matrix is ommited as z is recalculated manually
 uniform sampler2D	tex;
 uniform float		halfExtent;
 uniform vec2		diskCenter;
@@ -24,8 +25,11 @@ void main(void)
 {
 	vec2	poincare = (gl_FragCoord.xy - diskCenter) / diskRadius;
 	vec3	minkowski = poincareToMinkowski(poincare);
-	vec3	localMinkowski = objInvFrame * minkowski;
-	vec2	local = localMinkowski.xy / (localMinkowski.z + 1.0);
+	
+	float	lX = dot(objInvFrameRowX, minkowski);
+	float	lY = dot(objInvFrameRowY, minkowski);
+	float	lZ = sqrt(lX * lX + lY * lY + 1.0);
+	vec2	local = vec2(lX, lY) / (lZ + 1.0);
 	
 	local = local / (2.0 * halfExtent) + 0.5;
 	if (local.x < 0.0 || local.x > 1.0 || local.y < 0.0 || local.y > 0.0)
