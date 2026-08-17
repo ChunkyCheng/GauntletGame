@@ -9,7 +9,10 @@ HYPERBOLICS_FILES	= MinkowskiCoord.cpp	PoincareCoord.cpp
 ENTITIES_DIR		= Entities
 ENTITIES_FILES		= Entity.cpp
 
-MODULES		=	HYPERBOLICS		ENTITIES
+RENDERING_DIR		= Rendering
+RENDERING_FILES		= ShaderRaii.cpp		PoincareWarpShader.cpp
+
+MODULES		=	RENDERING	HYPERBOLICS		ENTITIES
 
 $(foreach M,$(MODULES), $(eval $(M)_SRCS = $(addprefix $($(M)_DIR)/, $($(M)_FILES))))
 
