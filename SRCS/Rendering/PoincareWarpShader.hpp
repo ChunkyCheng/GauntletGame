@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ShaderRaii.hpp"
+#include "raylib.h"
 
 class	PoincareWarpShader : public ShaderRaii
 {
@@ -8,12 +9,12 @@ class	PoincareWarpShader : public ShaderRaii
 		PoincareWarpShader(void);
 		PoincareWarpShader(const PoincareWarpShader& other) = delete;
 		PoincareWarpShader&	operator=(const PoincareWarpShader& other) = delete;
-		~PoincareWarpShader(void) = default;
+		~PoincareWarpShader(void);
 
-		void	setObjInvFrame(float rowX[3], float rowY[3]) const;
+		void	setObjInvFrame(Vector3 rowX, Vector3 rowY) const;
 		void	setHalfExtent(float halfExtent) const;
 		void	setDiskCenter(float x, float y) const;
-		void	setDistRadius(float radius) const;
+		void	setDiskRadius(float radius) const;
 
 	private:
 		const int	m_objInvFrameRowXLoc;

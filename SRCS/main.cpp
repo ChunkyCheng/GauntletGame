@@ -4,6 +4,7 @@
 #include "raylib.h"
 
 #include "Entity.hpp"
+#include "PoincareWarpShader.hpp"
 
 constexpr int	WIN_WIDTH = 1280;
 constexpr int	WIN_HEIGHT = 720;
@@ -19,31 +20,38 @@ int	main(void)
 	SetTraceLogLevel(LOG_WARNING);
 	InitWindow(WIN_WIDTH, WIN_HEIGHT, "hyper_long");
 	SetTargetFPS(60);
-	while (!WindowShouldClose())
+
 	{
-		dt = GetFrameTime() - dt;
-		if (IsKeyDown(KEY_UP)) player.moveY(PLAYER_MOVE_DIST * dt);
-		if (IsKeyDown(KEY_DOWN)) player.moveY(-PLAYER_MOVE_DIST * dt);
-		if (IsKeyDown(KEY_LEFT)) player.moveX(-PLAYER_MOVE_DIST * dt);
-		if (IsKeyDown(KEY_RIGHT)) player.moveX(PLAYER_MOVE_DIST * dt);
+		PoincareWarpShader	mapShader;
+		
 
-		std::stringstream	playerPos;
+		while (!WindowShouldClose())
+		{
+			dt = GetFrameTime() - dt;
+			if (IsKeyDown(KEY_UP)) player.moveY(PLAYER_MOVE_DIST * dt);
+			if (IsKeyDown(KEY_DOWN)) player.moveY(-PLAYER_MOVE_DIST * dt);
+			if (IsKeyDown(KEY_LEFT)) player.moveX(-PLAYER_MOVE_DIST * dt);
+			if (IsKeyDown(KEY_RIGHT)) player.moveX(PLAYER_MOVE_DIST * dt);
 
-		playerPos << player.pos();
+			std::stringstream	playerPos;
 
-		BeginDrawing();
-		ClearBackground(BLACK);
-		DrawCircle(WIN_WIDTH / 2, WIN_HEIGHT / 2, MAP_RADIUS, WHITE);
-		PoincareCoord	p = (dot.pos().relativeTo(player.pos())).toPoincare();
+			playerPos << player.pos();
 
-		DrawCircle(
-			WIN_WIDTH / 2 + p.x() * MAP_RADIUS,
-			WIN_HEIGHT / 2 - p.y() * MAP_RADIUS,
-			5,
-			RED
-		);
-		DrawText(playerPos.str().c_str(), 5, 5, 20, RED);
-		EndDrawing();
+			BeginDrawing();
+			ClearBackground(BLACK);
+			DrawCircle(WIN_WIDTH / 2, WIN_HEIGHT / 2, MAP_RADIUS, WHITE);
+			DrawText(playerPos.str().c_str(), 5, 5, 20, RED);
+
+			BeginShaderMode(*mapShader);
+			MinkowskiCoord	relative = (dot.pos().relativeTo(player.pos()));
+			mapShader.setObjInvFrame(relative.inverseRowX(), relative.inverseRowY());
+			mapShader.setDiskCenter(WIN_WIDTH / 2, WIN_HEIGHT / 2);
+			mapShader.setDiskRadius(MAP_RADIUS);
+			mapShader.setHalfExtent(0.1);
+			DrawCircle(WIN_WIDTH / 2, WIN_HEIGHT / 2, MAP_RADIUS, WHITE);
+			EndShaderMode();
+			EndDrawing();
+		}
 	}
 	CloseWindow();
 }

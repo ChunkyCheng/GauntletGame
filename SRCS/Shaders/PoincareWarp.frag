@@ -10,8 +10,8 @@ uniform float		diskRadius;
 vec3	poincareToMinkowski(vec2 poincare)
 {
 	float	r2 = dot(poincare, poincare);
-	if (r2 >= 1.0)
-		discard ;
+	//if (r2 >= 1.0)
+	//	discard ;
 	
 	float	denom = 1.0 - r2;
 	return vec3(
@@ -32,12 +32,14 @@ void main(void)
 	vec2	local = vec2(lX, lY) / (lZ + 1.0);
 	
 	local = local / (2.0 * halfExtent) + 0.5;
-	if (local.x < 0.0 || local.x > 1.0 || local.y < 0.0 || local.y > 0.0)
+	if (local.x < 0.0 || local.x > 1.0 || local.y < 0.0 || local.y > 1.0)
 		discard ;
 	
-	vec4	colour = texture2D(texture0, local);
+	//vec4	colour = texture2D(texture0, local);
 	
-	if (colour.a < 0.01)
+	//if (colour.a < 0.01)
+	//	discard ;
+	if (distance(local, vec2(0.5)) > 0.5)
 		discard ;
-	gl_FragColor = colour;
+	gl_FragColor = vec4(1, 0, 0, 1);
 }

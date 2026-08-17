@@ -1,5 +1,7 @@
 #pragma once
 
+#include "raylib.h"
+
 class	Shader;
 
 class	ShaderRaii
@@ -16,6 +18,6 @@ class	ShaderRaii
 		const Shader&	operator->(void) const;
 
 	protected:
-		Shader	*m_shaderPtr;
+		Shader	m_shader;
 };
 
