@@ -35,11 +35,11 @@ void main(void)
 	if (local.x < 0.0 || local.x > 1.0 || local.y < 0.0 || local.y > 1.0)
 		discard ;
 	
-	//vec4	colour = texture2D(texture0, local);
+	vec4	colour = texture2D(texture0, vec2(local.x, 1.0 - local.y));
 	
-	//if (colour.a < 0.01)
-	//	discard ;
-	if (distance(local, vec2(0.5)) > 0.5)
+	if (colour.a < 0.01)
 		discard ;
-	gl_FragColor = vec4(1, 0, 0, 1);
+	// if (distance(local, vec2(0.5)) > 0.5)
+	// 	discard ;
+	gl_FragColor = colour;
 }
