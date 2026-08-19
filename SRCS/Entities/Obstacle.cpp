@@ -18,9 +18,11 @@ void	Obstacle::updatePos(float dt)
 {
 	if (m_shouldDespawn)
 		return ;
-	if (pos().z() > 1000)
+	if (pos().z() > 100)
 		m_shouldDespawn = true;
 
 	moveX(m_moveVector.x * dt);
 	moveY(m_moveVector.y * dt);
 }
+
+bool	Obstacle::shouldDespawn(void) const { return m_shouldDespawn; }

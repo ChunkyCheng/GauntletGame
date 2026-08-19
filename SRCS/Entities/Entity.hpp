@@ -19,9 +19,9 @@ class	Entity
 		void			moveX(float dist);
 		void			moveY(float dist);
 	
-		bool			collides(const Entity& other) const;
-		void			runCollisionEvents(std::vector<std::unique_ptr<Entity>>& others);
-		virtual	void	collisionEvent(const Entity& other);
+		bool						collides(const Entity& other) const;
+		template<typename T>void	runCollisionEvents(const T& others);
+		virtual	void				collisionEvent(const Entity& other);
 
 		const MinkowskiCoord&	pos(void) const;
 		const Texture&			texture(void) const;
@@ -41,3 +41,5 @@ class	Entity
 		float						m_hitboxRadius;
 		Color						m_hitboxColor;
 };
+
+#include "Entity.tpp"

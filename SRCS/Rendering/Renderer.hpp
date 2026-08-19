@@ -15,7 +15,11 @@ class	Renderer
 		Renderer&	operator=(const Renderer& other);
 		~Renderer(void);
 
-		void	renderMap(Vector2 diskCenter, float diskRadius, const std::vector<std::unique_ptr<Entity>>& entities);
+		void	renderEntity(Vector2 diskCenter, float diskRadius, const Entity& entity);
+		void	renderEntityTextured(Vector2 diskCenter, float diskRadius, const Entity& entity);
+		void	renderEntityHitbox(Vector2 diskCenter, float diskRadius, const Entity& entity);
+		
+		template<typename T>void	renderMap(Vector2 diskCenter, float diskRadius, const T& entities);
 
 	protected:
 	private:
@@ -23,3 +27,4 @@ class	Renderer
 		PoincareWarpShader	m_mapShader;
 };
 
+#include "Renderer.tpp"

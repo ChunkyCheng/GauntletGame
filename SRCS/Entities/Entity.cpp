@@ -23,22 +23,23 @@ bool	Entity::collides(const Entity& other) const
 	return false;
 }
 
-void	Entity::runCollisionEvents(std::vector<std::unique_ptr<Entity>>& others)
-{
-	setHitboxColor(RED);
-	for (auto& e : others)
-	{
-		if (this == e.get())
-			continue ;
-		e->setHitboxColor(RED);
-		if (collides(*e))
-		{
-			e->setHitboxColor(GREEN);
-			collisionEvent(*e);
-			e->collisionEvent(*this);
-		}
-	}
-}
+// template<typename T>
+// void	Entity::runCollisionEvents(const T& others)
+// {
+// 	setHitboxColor(RED);
+// 	for (auto& e : others)
+// 	{
+// 		if (this == e.get())
+// 			continue ;
+// 		e->setHitboxColor(RED);
+// 		if (collides(*e))
+// 		{
+// 			e->setHitboxColor(GREEN);
+// 			collisionEvent(*e);
+// 			e->collisionEvent(*this);
+// 		}
+// 	}
+// }
 
 void	Entity::collisionEvent(const Entity& other)
 {

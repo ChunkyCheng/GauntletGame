@@ -1,6 +1,7 @@
 #include "MinkowskiCoord.hpp"
 #include <iomanip>
 #include <cmath>
+#include "PoincareCoord.hpp"
 
 MinkowskiCoord::MinkowskiCoord(float x, float y)
 	: m_x(x)

@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+class	MinkowskiCoord;
+
 class	PoincareCoord
 {
 	public:
@@ -10,8 +12,11 @@ class	PoincareCoord
 		PoincareCoord&	operator=(const PoincareCoord& other) = default;
 		~PoincareCoord(void) = default;
 
+		MinkowskiCoord	toMinkowski(void) const;
+
 		void	setX(float x);
 		void	setY(float y);
+
 		float	x(void) const;
 		float	y(void) const;
 

@@ -6,12 +6,12 @@
 
 #include "GameState.hpp"
 #include "Player.hpp"
-#include "Obstacle.hpp"
+#include "ObstacleManager.hpp"
 #include "Renderer.hpp"
 
 constexpr int	WIN_WIDTH = 1280;
 constexpr int	WIN_HEIGHT = 800;
-constexpr int	MAP_RADIUS = WIN_HEIGHT / 2 - 50;
+constexpr int	MAP_RADIUS = WIN_HEIGHT / 2 - 10;
 
 int	main(void)
 {
@@ -20,26 +20,33 @@ int	main(void)
 	SetTargetFPS(60);
 
 	{
-		GameState								gameState;
-		Renderer								renderer(gameState);	
-		std::vector<std::unique_ptr<Entity>>	entities;
-
-		entities.push_back(std::make_unique<Obstacle>(-10, -10, 2, 45));
-		entities.push_back(std::make_unique<Player>());
+		GameState		gameState;
+		Renderer		renderer(gameState);
+		Player			player;
+		ObstacleManager	obstacleManager;
 
 		while (!WindowShouldClose())
 		{
 			float	dt = GetFrameTime();
 
-			for (auto& e : entities)
+			player.updatePos(dt);
+			for (auto& e : obstacleManager.obstacles())
 				e->updatePos(dt);
-			entities.back()->runCollisionEvents(entities);
+			obstacleManager.removeDespawned();
+			obstacleManager.spawnRandom();
+			player.runCollisionEvents(obstacleManager.obstacles());
 			BeginDrawing();
 			ClearBackground(BLACK);
+			
 			renderer.renderMap(
 				{WIN_WIDTH / 2, WIN_HEIGHT / 2},
-				WIN_HEIGHT / 2 - 10,
-				entities
+				MAP_RADIUS,
+				obstacleManager.obstacles()
+			);
+			renderer.renderEntity(
+				{WIN_WIDTH / 2, WIN_HEIGHT / 2},
+				MAP_RADIUS,
+				player
 			);
 			DrawFPS(5, 5);
 

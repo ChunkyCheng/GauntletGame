@@ -1,8 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include "PoincareCoord.hpp"
 #include "raylib.h"
+
+class	PoincareCoord;
 
 class	MinkowskiCoord
 {

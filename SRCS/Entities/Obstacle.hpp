@@ -12,6 +12,8 @@ class	Obstacle : public Entity
 
 		void	updatePos(float dt);
 
+		bool	shouldDespawn(void) const;
+
 	protected:
 	private:
 		Vector2	m_moveVector;
