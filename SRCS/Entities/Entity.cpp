@@ -1,9 +1,9 @@
 #include "Entity.hpp"
 
-Entity::Entity(float x, float y, const std::string& texturePath, float textureExtent)
+Entity::Entity(float x, float y, const std::string& texturePath, float textureExtent, float hitboxRadius)
 	: m_pos(x, y)
 	, m_textureExtent(textureExtent)
-	, m_hitboxRadius(0.15)
+	, m_hitboxRadius(hitboxRadius)
 {
 	if (texturePath.length() != 0)
 	{

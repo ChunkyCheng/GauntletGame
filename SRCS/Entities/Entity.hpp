@@ -8,7 +8,7 @@
 class	Entity
 {
 	public:
-		Entity(float x, float y, const std::string& texture, float textureExtent);
+		Entity(float x, float y, const std::string& texture, float textureExtent, float hitboxRadius);
 		Entity(const Entity& other);
 		Entity&	operator=(const Entity& other);
 	public:

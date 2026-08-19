@@ -1,7 +1,10 @@
 #include "Renderer.hpp"
 #include <cmath>
+#include "GameState.hpp"
 
-Renderer::Renderer(void) {}
+Renderer::Renderer(const GameState& gameState)
+	: m_gameState(gameState)
+{}
 Renderer::~Renderer(void) {}
 
 void	Renderer::renderMap(Vector2 diskCenter, float diskRadius, const std::vector<std::unique_ptr<Entity>>& entities)
@@ -35,5 +38,13 @@ void	Renderer::renderMap(Vector2 diskCenter, float diskRadius, const std::vector
 			DrawCircle(diskCenter.x, diskCenter.y, diskRadius, WHITE);
 		}
 		EndShaderMode();
+		if (e->hasTexture() && m_gameState.showDebug())
+		{
+			BeginShaderMode(*m_mapShader);
+			m_mapShader.setHalfExtent(std::tanh(e->hitboxRadius() / 2.0));
+			m_mapShader.setDrawMode(PoincareWarpShader::circle);
+			DrawCircle(diskCenter.x, diskCenter.y, diskRadius, WHITE);
+			EndShaderMode();
+		}
 	}
 }

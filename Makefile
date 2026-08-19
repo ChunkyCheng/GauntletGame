@@ -17,7 +17,7 @@ MODULES		=	RENDERING	HYPERBOLICS		ENTITIES
 $(foreach M,$(MODULES), $(eval $(M)_SRCS = $(addprefix $($(M)_DIR)/, $($(M)_FILES))))
 
 SRC_DIR		=	SRCS
-SRC_FILES	=	main.cpp
+SRC_FILES	=	main.cpp	GameState.cpp
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES) $(foreach M,$(MODULES), $($(M)_SRCS)))
 
 OBJ_DIR	=	OBJS
@@ -26,7 +26,7 @@ OBJS	=	$(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 RAYLIB_DIR	= vendor/raylib/src
 RAYLIB		= $(RAYLIB_DIR)/librarylib.a
 
-IFLAGS = $(addprefix -I$(SRC_DIR)/, $(foreach M,$(MODULES), $($(M)_DIR))) -I$(RAYLIB_DIR)
+IFLAGS = -I$(SRC_DIR) $(addprefix -I$(SRC_DIR)/, $(foreach M,$(MODULES), $($(M)_DIR))) -I$(RAYLIB_DIR)
 LFLAGS = -L$(RAYLIB_DIR) -lraylib -lX11
 
 ##########################################################################################

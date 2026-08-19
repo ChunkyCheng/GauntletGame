@@ -4,6 +4,7 @@
 #include <memory>
 #include "raylib.h"
 
+#include "GameState.hpp"
 #include "Player.hpp"
 #include "Renderer.hpp"
 
@@ -18,11 +19,12 @@ int	main(void)
 	SetTargetFPS(60);
 
 	{
-		Renderer								renderer;	
+		GameState								gameState;
+		Renderer								renderer(gameState);	
 		std::vector<std::unique_ptr<Entity>>	entities;
 
-		entities.push_back(std::make_unique<Entity>(-1, 1, "", 0));
-		entities.push_back(std::make_unique<Entity>(1, 1, "", 0));
+		entities.push_back(std::make_unique<Entity>(-1, 1, "", 0, 0.15));
+		entities.push_back(std::make_unique<Entity>(1, 1, "", 0, 0.15));
 		entities.push_back(std::make_unique<Player>());
 
 		while (!WindowShouldClose())

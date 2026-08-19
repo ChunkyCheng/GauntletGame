@@ -5,10 +5,12 @@
 #include "PoincareWarpShader.hpp"
 #include "Entity.hpp"
 
+class	GameState;
+
 class	Renderer
 {
 	public:
-		Renderer(void);
+		Renderer(const GameState& gameState);
 		Renderer(const Renderer& other);
 		Renderer&	operator=(const Renderer& other);
 		~Renderer(void);
@@ -17,6 +19,7 @@ class	Renderer
 
 	protected:
 	private:
+		const GameState&	m_gameState;
 		PoincareWarpShader	m_mapShader;
 };
 
