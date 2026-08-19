@@ -8,6 +8,7 @@ PoincareWarpShader::PoincareWarpShader(void)
 	, m_diskCenterLoc(GetShaderLocation(**this, "diskCenter"))
 	, m_diskRadiusLoc(GetShaderLocation(**this, "diskRadius"))
 	, m_drawModeLoc(GetShaderLocation(**this, "drawMode"))
+	, m_textureOffsetLoc(GetShaderLocation(**this, "textureOffset"))
 {
 }
 
@@ -46,3 +47,7 @@ void	PoincareWarpShader::setDrawMode(DrawMode drawMode) const
 	SetShaderValue(**this, m_drawModeLoc, &drawMode, SHADER_UNIFORM_INT);
 }
 
+void	PoincareWarpShader::setTextureOffset(Vector2 textureOffset) const
+{
+	SetShaderValue(**this, m_textureOffsetLoc, &textureOffset, SHADER_UNIFORM_VEC2);
+}

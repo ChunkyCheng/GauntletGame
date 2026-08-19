@@ -23,8 +23,8 @@ int	main(void)
 		Renderer								renderer(gameState);	
 		std::vector<std::unique_ptr<Entity>>	entities;
 
-		entities.push_back(std::make_unique<Entity>(-1, 1, "", 0, 0.15));
-		entities.push_back(std::make_unique<Entity>(1, 1, "", 0, 0.15));
+		entities.push_back(std::make_unique<Entity>(-1, 1, "", 0, Vector2{0, 0}, 0.15));
+		entities.push_back(std::make_unique<Entity>(1, 1, "", 0, Vector2{0, 0}, 0.15));
 		entities.push_back(std::make_unique<Player>());
 
 		while (!WindowShouldClose())

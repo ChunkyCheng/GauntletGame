@@ -22,6 +22,7 @@ class	PoincareWarpShader : public ShaderRaii
 		void	setDiskCenter(float x, float y) const;
 		void	setDiskRadius(float radius) const;
 		void	setDrawMode(DrawMode drawMode) const;
+		void	setTextureOffset(Vector2 textureOffset) const;
 
 	private:
 		const int	m_objInvFrameRowXLoc;
@@ -30,5 +31,6 @@ class	PoincareWarpShader : public ShaderRaii
 		const int	m_diskCenterLoc;
 		const int	m_diskRadiusLoc;
 		const int	m_drawModeLoc;
+		const int	m_textureOffsetLoc;
 };
 

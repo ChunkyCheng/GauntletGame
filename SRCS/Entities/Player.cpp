@@ -3,7 +3,7 @@
 #include <cmath>
 
 Player::Player(void)
-	: Entity(0, 0, "textures/wau.png", 0.3, 0.2)
+	: Entity(0, 0, "textures/wau.png", 0.3, {0, 0.02}, 0.2)
 {
 }
 

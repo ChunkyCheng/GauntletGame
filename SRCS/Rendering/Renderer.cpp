@@ -22,6 +22,7 @@ void	Renderer::renderMap(Vector2 diskCenter, float diskRadius, const std::vector
 		{
 			m_mapShader.setHalfExtent(e->textureExtent() / 2);
 			m_mapShader.setDrawMode(PoincareWarpShader::textured);
+			m_mapShader.setTextureOffset(e->textureOffset());
 			Rectangle	src = { 0, 0, (float)e->texture().width, (float)e->texture().height };
 			Rectangle	dst = {
 				diskCenter.x - diskRadius,

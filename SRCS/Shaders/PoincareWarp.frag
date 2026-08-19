@@ -2,11 +2,12 @@
 
 uniform vec3		objInvFrameRowX;
 uniform vec3		objInvFrameRowY; //RowZ for this matrix is ommited as z is recalculated manually
-uniform sampler2D	texture0;
 uniform float		halfExtent;
 uniform vec2		diskCenter;
 uniform float		diskRadius;
 uniform int			drawMode;
+uniform sampler2D	texture0;
+uniform vec2		textureOffset;
 
 vec3	poincareToMinkowski(vec2 poincare)
 {
@@ -31,7 +32,9 @@ void main(void)
 	float	lY = dot(objInvFrameRowY, minkowski);
 	float	lZ = sqrt(lX * lX + lY * lY + 1.0);
 	vec2	local = vec2(lX, lY) / (lZ + 1.0);
-	
+
+	if (drawMode == 0)	
+		local -= textureOffset;
 	local = local / (2.0 * halfExtent) + 0.5;
 	if (local.x < 0.0 || local.x > 1.0 || local.y < 0.0 || local.y > 1.0)
 		discard ;
