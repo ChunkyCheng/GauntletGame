@@ -36,7 +36,7 @@ void	Renderer::renderMap(Vector2 diskCenter, float diskRadius, const std::vector
 		{
 			m_mapShader.setHalfExtent(std::tanh(e->hitboxRadius() / 2.0));
 			m_mapShader.setDrawMode(PoincareWarpShader::circle);
-			DrawCircle(diskCenter.x, diskCenter.y, diskRadius, WHITE);
+			DrawCircle(diskCenter.x, diskCenter.y, diskRadius, RED);
 		}
 		EndShaderMode();
 		if (e->hasTexture() && m_gameState.showDebug())
@@ -44,7 +44,7 @@ void	Renderer::renderMap(Vector2 diskCenter, float diskRadius, const std::vector
 			BeginShaderMode(*m_mapShader);
 			m_mapShader.setHalfExtent(std::tanh(e->hitboxRadius() / 2.0));
 			m_mapShader.setDrawMode(PoincareWarpShader::circle);
-			DrawCircle(diskCenter.x, diskCenter.y, diskRadius, WHITE);
+			DrawCircle(diskCenter.x, diskCenter.y, diskRadius, RED);
 			EndShaderMode();
 		}
 	}

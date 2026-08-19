@@ -6,8 +6,9 @@ uniform float		halfExtent;
 uniform vec2		diskCenter;
 uniform float		diskRadius;
 uniform int			drawMode;
-uniform sampler2D	texture0;
 uniform vec2		textureOffset;
+uniform sampler2D	texture0;
+in vec4				fragColor;
 
 vec3	poincareToMinkowski(vec2 poincare)
 {
@@ -50,6 +51,6 @@ void main(void)
 	{
 		if (distance(local, vec2(0.5)) > 0.5)
 	 		discard ;
-		gl_FragColor = vec4(1, 0, 0, 0.6);
+		gl_FragColor = vec4(vec3(fragColor.xyz), 0.6);
 	}
 }
