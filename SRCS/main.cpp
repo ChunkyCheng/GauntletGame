@@ -2,6 +2,8 @@
 #include <sstream>
 #include <iostream>
 #include <memory>
+#include <random>
+#include <ctime>
 #include "raylib.h"
 
 #include "GameState.hpp"
@@ -15,6 +17,7 @@ constexpr int	MAP_RADIUS = WIN_HEIGHT / 2 - 10;
 
 int	main(void)
 {
+	std::srand(std::time(0));
 	SetTraceLogLevel(LOG_WARNING);
 	InitWindow(WIN_WIDTH, WIN_HEIGHT, "hyper_long");
 	SetTargetFPS(60);
@@ -33,7 +36,7 @@ int	main(void)
 			for (auto& e : obstacleManager.obstacles())
 				e->updatePos(dt);
 			obstacleManager.removeDespawned();
-			obstacleManager.spawnRandom();
+			if (IsKeyPressed(KEY_S)) obstacleManager.spawnRandom();
 			player.runCollisionEvents(obstacleManager.obstacles());
 			BeginDrawing();
 			ClearBackground(BLACK);

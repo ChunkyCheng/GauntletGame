@@ -5,7 +5,7 @@
 class	Obstacle : public Entity
 {
 	public:
-		Obstacle(float x, float y, float moveSpeed, float moveAngle);
+		Obstacle(float x, float y, float moveSpeed, float moveAngle, float hitboxRadius);
 		Obstacle(const Obstacle& other);
 		Obstacle&	operator=(const Obstacle& other);
 		~Obstacle(void);

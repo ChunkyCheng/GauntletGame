@@ -1,8 +1,8 @@
 #include "Obstacle.hpp"
 #include <cmath>
 
-Obstacle::Obstacle(float x, float y, float moveSpeed, float moveAngle)
-	: Entity(x, y, "", 0, {0, 0}, 0.5)
+Obstacle::Obstacle(float x, float y, float moveSpeed, float moveAngle, float hitboxRadius)
+	: Entity(x, y, "textures/helicopter.png", hitboxRadius * 1.2, {0, 0}, hitboxRadius)
 	, m_shouldDespawn(false)
 {
 	float angleRad = moveAngle * DEG2RAD;

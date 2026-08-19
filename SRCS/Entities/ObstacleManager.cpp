@@ -18,17 +18,14 @@ void	ObstacleManager::removeDespawned(void)
 
 void	ObstacleManager::spawnRandom(void)
 {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> dis(-0.8f, 0.8f);
 
-	float	x = dis(gen);
-	float	y = std::sqrt(0.8 - (x * x));
-	if (std::rand() % 2)
-		y *= -1;
-	
+	float	angle = (std::rand() % 8) * 45;
+	float	x = -std::sin((180 - angle) * DEG2RAD) * 0.99;
+	float	y = std::cos((180 - angle) * DEG2RAD) * 0.99;
+
 	MinkowskiCoord	pos = PoincareCoord(x, y).toMinkowski();
-	m_obstacles.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), 1, 0));
+	angle += 2 / (std::rand() % 10 + 1) - 1;
+	m_obstacles.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), 1.5, angle, 0.3));
 }
 
 
