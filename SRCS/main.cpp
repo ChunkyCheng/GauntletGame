@@ -6,6 +6,7 @@
 
 #include "GameState.hpp"
 #include "Player.hpp"
+#include "Obstacle.hpp"
 #include "Renderer.hpp"
 
 constexpr int	WIN_WIDTH = 1280;
@@ -23,8 +24,7 @@ int	main(void)
 		Renderer								renderer(gameState);	
 		std::vector<std::unique_ptr<Entity>>	entities;
 
-		entities.push_back(std::make_unique<Entity>(-1, 1, "", 0, Vector2{0, 0}, 0.15));
-		entities.push_back(std::make_unique<Entity>(1, 1, "", 0, Vector2{0, 0}, 0.15));
+		entities.push_back(std::make_unique<Obstacle>(-10, -10, 1, 45));
 		entities.push_back(std::make_unique<Player>());
 
 		while (!WindowShouldClose())

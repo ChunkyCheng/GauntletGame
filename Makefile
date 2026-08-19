@@ -7,7 +7,7 @@ HYPERBOLICS_DIR		= Hyperbolics
 HYPERBOLICS_FILES	= MinkowskiCoord.cpp	PoincareCoord.cpp
 
 ENTITIES_DIR		= Entities
-ENTITIES_FILES		= Entity.cpp			Player.cpp
+ENTITIES_FILES		= Entity.cpp			Player.cpp					Obstacle.cpp
 
 RENDERING_DIR		= Rendering
 RENDERING_FILES		= ShaderRaii.cpp		PoincareWarpShader.cpp		Renderer.cpp
