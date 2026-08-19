@@ -11,10 +11,17 @@ class	PoincareWarpShader : public ShaderRaii
 		PoincareWarpShader&	operator=(const PoincareWarpShader& other) = delete;
 		~PoincareWarpShader(void);
 
+		enum	DrawMode
+		{
+			textured,
+			circle
+		};
+
 		void	setObjInvFrame(Vector3 rowX, Vector3 rowY) const;
 		void	setHalfExtent(float halfExtent) const;
 		void	setDiskCenter(float x, float y) const;
 		void	setDiskRadius(float radius) const;
+		void	setDrawMode(DrawMode drawMode) const;
 
 	private:
 		const int	m_objInvFrameRowXLoc;
@@ -22,5 +29,6 @@ class	PoincareWarpShader : public ShaderRaii
 		const int	m_halfExtentLoc;
 		const int	m_diskCenterLoc;
 		const int	m_diskRadiusLoc;
+		const int	m_drawModeLoc;
 };
 

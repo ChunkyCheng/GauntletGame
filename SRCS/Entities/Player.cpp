@@ -2,7 +2,7 @@
 #include "raylib.h"
 
 Player::Player(void)
-	: Entity(0, 0, LoadTexture("textures/wau.png"))
+	: Entity(0, 0, "textures/wau.png")
 {
 }
 

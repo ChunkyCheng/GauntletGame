@@ -1,10 +1,11 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <memory>
 #include "raylib.h"
 
 #include "Player.hpp"
-#include "PoincareWarpShader.hpp"
+#include "Renderer.hpp"
 
 constexpr int	WIN_WIDTH = 1280;
 constexpr int	WIN_HEIGHT = 800;
@@ -17,33 +18,29 @@ int	main(void)
 	SetTargetFPS(60);
 
 	{
-		PoincareWarpShader	mapShader;
-		Player				player;		
+		Renderer								renderer;	
+		std::vector<std::unique_ptr<Entity>>	entities;
+
+		entities.push_back(std::make_unique<Player>());
+		entities.push_back(std::make_unique<Entity>(-1, 1, ""));
+		entities.push_back(std::make_unique<Entity>(1, 1, ""));
 
 		while (!WindowShouldClose())
 		{
 			float	dt = GetFrameTime();
 
-			std::stringstream	playerPos;
-			playerPos << player.pos();
-
-			player.updatePos(dt);
+			for (auto& e : entities)
+				e->updatePos(dt);
 
 			BeginDrawing();
 			ClearBackground(BLACK);
-			DrawCircle(WIN_WIDTH / 2, WIN_HEIGHT / 2, MAP_RADIUS, WHITE);
+			renderer.renderMap(
+				{WIN_WIDTH / 2, WIN_HEIGHT / 2},
+				WIN_HEIGHT / 2 - 10,
+				entities
+			);
 			DrawFPS(5, 5);
-			DrawText(playerPos.str().c_str(), 5, 30, 20, RED);
 
-			BeginShaderMode(*mapShader);
-			mapShader.setObjInvFrame(player.pos().inverseRowX(), player.pos().inverseRowY());
-			mapShader.setDiskCenter(WIN_WIDTH / 2, WIN_HEIGHT / 2);
-			mapShader.setDiskRadius(MAP_RADIUS);
-			mapShader.setHalfExtent(0.15);
-			Rectangle	src = { 0, 0, (float)player.texture().width, (float)player.texture().height };
-			Rectangle	dst = { 0, 0, WIN_WIDTH, WIN_HEIGHT };
-			DrawTexturePro(player.texture(), src, dst, {0, 0}, 0.0, WHITE);
-			EndShaderMode();
 			EndDrawing();
 		}
 	}

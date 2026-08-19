@@ -1,7 +1,7 @@
 NAME	=	HyperLong
 
 CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17 #-fsanitize=address
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17 -fsanitize=address
 
 HYPERBOLICS_DIR		= Hyperbolics
 HYPERBOLICS_FILES	= MinkowskiCoord.cpp	PoincareCoord.cpp
@@ -10,7 +10,7 @@ ENTITIES_DIR		= Entities
 ENTITIES_FILES		= Entity.cpp			Player.cpp
 
 RENDERING_DIR		= Rendering
-RENDERING_FILES		= ShaderRaii.cpp		PoincareWarpShader.cpp
+RENDERING_FILES		= ShaderRaii.cpp		PoincareWarpShader.cpp		Renderer.cpp
 
 MODULES		=	RENDERING	HYPERBOLICS		ENTITIES
 

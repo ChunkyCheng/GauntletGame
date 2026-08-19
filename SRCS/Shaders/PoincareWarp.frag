@@ -6,6 +6,7 @@ uniform sampler2D	texture0;
 uniform float		halfExtent;
 uniform vec2		diskCenter;
 uniform float		diskRadius;
+uniform int			drawMode;
 
 vec3	poincareToMinkowski(vec2 poincare)
 {
@@ -34,12 +35,18 @@ void main(void)
 	local = local / (2.0 * halfExtent) + 0.5;
 	if (local.x < 0.0 || local.x > 1.0 || local.y < 0.0 || local.y > 1.0)
 		discard ;
-	
-	vec4	colour = texture2D(texture0, vec2(local.x, 1.0 - local.y));
-	
-	if (colour.a < 0.01)
-		discard ;
-	// if (distance(local, vec2(0.5)) > 0.5)
-	// 	discard ;
-	gl_FragColor = colour;
+
+	if (drawMode == 0)
+	{
+		vec4	colour = texture2D(texture0, vec2(local.x, 1.0 - local.y));
+		if (colour.a < 0.01)
+			discard ;
+		gl_FragColor = colour;
+	}
+	else if (drawMode == 1)
+	{
+		if (distance(local, vec2(0.5)) > 0.5)
+	 		discard ;
+		gl_FragColor = vec4(1, 0, 0, 1);
+	}
 }

@@ -7,6 +7,7 @@ PoincareWarpShader::PoincareWarpShader(void)
 	, m_halfExtentLoc(GetShaderLocation(**this, "halfExtent"))
 	, m_diskCenterLoc(GetShaderLocation(**this, "diskCenter"))
 	, m_diskRadiusLoc(GetShaderLocation(**this, "diskRadius"))
+	, m_drawModeLoc(GetShaderLocation(**this, "drawMode"))
 {
 }
 
@@ -38,5 +39,10 @@ void	PoincareWarpShader::setDiskCenter(float x, float y) const
 void	PoincareWarpShader::setDiskRadius(float radius) const
 {
 	SetShaderValue(**this, m_diskRadiusLoc, &radius, SHADER_UNIFORM_FLOAT);
+}
+
+void	PoincareWarpShader::setDrawMode(DrawMode drawMode) const
+{
+	SetShaderValue(**this, m_drawModeLoc, &drawMode, SHADER_UNIFORM_INT);
 }
 
