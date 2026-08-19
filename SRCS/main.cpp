@@ -21,8 +21,8 @@ int	main(void)
 		Renderer								renderer;	
 		std::vector<std::unique_ptr<Entity>>	entities;
 
-		entities.push_back(std::make_unique<Entity>(-1, 1, ""));
-		entities.push_back(std::make_unique<Entity>(1, 1, ""));
+		entities.push_back(std::make_unique<Entity>(-1, 1, "", 0));
+		entities.push_back(std::make_unique<Entity>(1, 1, "", 0));
 		entities.push_back(std::make_unique<Player>());
 
 		while (!WindowShouldClose())
@@ -31,6 +31,11 @@ int	main(void)
 
 			for (auto& e : entities)
 				e->updatePos(dt);
+
+			if (entities[2]->collides(*entities[0]))
+				std::cout << "collide left" << std::endl;
+			if (entities[2]->collides(*entities[1]))
+				std::cout << "collide right" << std::endl;
 
 			BeginDrawing();
 			ClearBackground(BLACK);

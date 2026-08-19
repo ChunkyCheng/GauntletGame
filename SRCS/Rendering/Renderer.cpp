@@ -13,9 +13,9 @@ void	Renderer::renderMap(Vector2 diskCenter, float diskRadius, const std::vector
 	{
 		BeginShaderMode(*m_mapShader);
 		m_mapShader.setObjInvFrame(e->pos().inverseRowX(), e->pos().inverseRowY());
-		m_mapShader.setHalfExtent(0.15);
 		if (e->hasTexture())
 		{
+			m_mapShader.setHalfExtent(e->textureExtent / 2);
 			m_mapShader.setDrawMode(PoincareWarpShader::textured);
 			Rectangle	src = { 0, 0, (float)e->texture().width, (float)e->texture().height };
 			Rectangle	dst = {
@@ -28,6 +28,7 @@ void	Renderer::renderMap(Vector2 diskCenter, float diskRadius, const std::vector
 		}
 		else
 		{
+			m_mapShader.setHalfExtent(e->hitboxRadius());
 			m_mapShader.setDrawMode(PoincareWarpShader::circle);
 			DrawCircle(diskCenter.x, diskCenter.y, diskRadius, WHITE);
 		}
