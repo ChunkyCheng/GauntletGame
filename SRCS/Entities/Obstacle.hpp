@@ -15,4 +15,5 @@ class	Obstacle : public Entity
 	protected:
 	private:
 		Vector2	m_moveVector;
+		bool	m_shouldDespawn;
 };

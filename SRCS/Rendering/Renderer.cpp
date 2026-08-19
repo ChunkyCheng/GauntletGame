@@ -17,7 +17,8 @@ void	Renderer::renderMap(Vector2 diskCenter, float diskRadius, const std::vector
 	for (const auto& e : entities)
 	{
 		BeginShaderMode(*m_mapShader);
-		m_mapShader.setObjInvFrame(e->pos().inverseRowX(), e->pos().inverseRowY());
+		MinkowskiCoord	relative = e->pos().relativeTo(MinkowskiCoord(1, 1));
+		m_mapShader.setObjInvFrame(relative.inverseRowX(), relative.inverseRowY());
 		if (e->hasTexture())
 		{
 			m_mapShader.setHalfExtent(e->textureExtent() / 2);
