@@ -25,7 +25,13 @@ void	ObstacleManager::spawnRandom(void)
 
 	MinkowskiCoord	pos = PoincareCoord(x, y).toMinkowski();
 	angle += 2 / (std::rand() % 10 + 1) - 1;
-	m_obstacles.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), 1.5, angle, 0.3));
+	std::string	texturePath;
+	if (angle < 180)
+		texturePath = "textures/helicopter-right.png";
+	else
+		texturePath = "textures/helicopter-left.png";
+	m_obstacles.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), texturePath, 1.5, angle, 0.3));
+
 }
 
 

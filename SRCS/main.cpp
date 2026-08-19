@@ -36,7 +36,7 @@ int	main(void)
 			for (auto& e : obstacleManager.obstacles())
 				e->updatePos(dt);
 			obstacleManager.removeDespawned();
-			if (IsKeyPressed(KEY_S)) obstacleManager.spawnRandom();
+			if (IsKeyDown(KEY_S)) obstacleManager.spawnRandom();
 			player.runCollisionEvents(obstacleManager.obstacles());
 			BeginDrawing();
 			ClearBackground(BLACK);
