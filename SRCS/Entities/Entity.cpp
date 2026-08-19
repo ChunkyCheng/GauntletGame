@@ -5,6 +5,7 @@ Entity::Entity(float x, float y, const std::string& texturePath, float textureEx
 	, m_textureExtent(textureExtent)
 	, m_textureOffset(textureOffset)
 	, m_hitboxRadius(hitboxRadius)
+	, m_hitboxColor(RED)
 {
 	if (texturePath.length() != 0)
 	{
@@ -15,12 +16,35 @@ Entity::Entity(float x, float y, const std::string& texturePath, float textureEx
 		m_texturePtr = nullptr;
 }
 
-bool	Entity::collides(const Entity& other)
+bool	Entity::collides(const Entity& other) const
 {
 	if (m_pos.hDist(other.m_pos) < (m_hitboxRadius + other.m_hitboxRadius))
 		return true;
 	return false;
 }
+
+void	Entity::runCollisionEvents(std::vector<std::unique_ptr<Entity>>& others)
+{
+	setHitboxColor(RED);
+	for (auto& e : others)
+	{
+		if (this == e.get())
+			continue ;
+		e->setHitboxColor(RED);
+		if (collides(*e))
+		{
+			e->setHitboxColor(GREEN);
+			collisionEvent(*e);
+			e->collisionEvent(*this);
+		}
+	}
+}
+
+void	Entity::collisionEvent(const Entity& other)
+{
+	(void)other;
+}
+
 
 void	Entity::updatePos(float dt) { (void)dt; }
 void	Entity::moveX(float dist) { m_pos.moveXHyperbolic(dist); }
@@ -32,3 +56,6 @@ bool					Entity::hasTexture(void) const { return m_texturePtr ? true : false; }
 float					Entity::textureExtent(void) const { return m_textureExtent; }
 const Vector2&			Entity::textureOffset(void) const { return m_textureOffset; }
 float					Entity::hitboxRadius(void) const { return m_hitboxRadius; }
+const Color&			Entity::hitboxColor(void) const { return m_hitboxColor; }
+
+void					Entity::setHitboxColor(const Color& color) { m_hitboxColor = color; }

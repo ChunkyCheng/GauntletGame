@@ -33,12 +33,7 @@ int	main(void)
 
 			for (auto& e : entities)
 				e->updatePos(dt);
-
-			if (entities[2]->collides(*entities[0]))
-				std::cout << "collide left" << std::endl;
-			if (entities[2]->collides(*entities[1]))
-				std::cout << "collide right" << std::endl;
-
+			entities.back()->runCollisionEvents(entities);
 			BeginDrawing();
 			ClearBackground(BLACK);
 			renderer.renderMap(

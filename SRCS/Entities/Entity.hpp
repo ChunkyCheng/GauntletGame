@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 #include "raylib.h"
 #include "MinkowskiCoord.hpp"
 
@@ -18,7 +19,9 @@ class	Entity
 		void			moveX(float dist);
 		void			moveY(float dist);
 	
-		bool			collides(const Entity& other);
+		bool			collides(const Entity& other) const;
+		void			runCollisionEvents(std::vector<std::unique_ptr<Entity>>& others);
+		virtual	void	collisionEvent(const Entity& other);
 
 		const MinkowskiCoord&	pos(void) const;
 		const Texture&			texture(void) const;
@@ -26,6 +29,9 @@ class	Entity
 		float					textureExtent(void) const;
 		const Vector2&			textureOffset(void) const;
 		float					hitboxRadius(void) const;
+		const Color&			hitboxColor(void) const;
+
+		void					setHitboxColor(const Color& color);
 
 	private:
 		MinkowskiCoord				m_pos;
@@ -33,4 +39,5 @@ class	Entity
 		float						m_textureExtent;
 		Vector2						m_textureOffset;
 		float						m_hitboxRadius;
+		Color						m_hitboxColor;
 };

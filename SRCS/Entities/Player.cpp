@@ -30,3 +30,12 @@ void	Player::updatePos(float dt)
 	moveX(move.x * dt);
 	moveY(move.y * dt);
 }
+
+void	Player::collisionEvent(const Entity& other)
+{
+	(void)other;
+	m_isAlive = false;
+	setHitboxColor(GREEN);
+}
+
+bool	Player::isAlive(void) const { return m_isAlive; }
