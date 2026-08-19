@@ -24,7 +24,7 @@ int	main(void)
 		Renderer								renderer(gameState);	
 		std::vector<std::unique_ptr<Entity>>	entities;
 
-		entities.push_back(std::make_unique<Obstacle>(-10, -10, 1, 45));
+		entities.push_back(std::make_unique<Obstacle>(-10, -10, 2, 45));
 		entities.push_back(std::make_unique<Player>());
 
 		while (!WindowShouldClose())

@@ -6,8 +6,8 @@ Obstacle::Obstacle(float x, float y, float moveSpeed, float moveAngle)
 {
 	float angleRad = moveAngle * DEG2RAD;
 	m_moveVector = {
-		std::sin(angleRad) / moveSpeed,
-		std::cos(angleRad) / moveSpeed
+		std::sin(angleRad) * moveSpeed,
+		std::cos(angleRad) * moveSpeed
 	};
 }
 
