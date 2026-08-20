@@ -12,12 +12,13 @@ class	Player : public Entity
 		Player&	operator=(const Player& other);
 		~Player(void);
 
-		bool	isAlive(void) const;
-
+		void	reset(void);
 		void	updatePos(float dt);
 		void	collisionEvent(const Entity& other);
 	
+		bool	isAlive(void) const;
+
 	private:
-		bool	m_isAlive = true;
+		bool	m_isAlive;
 };
 

@@ -2,7 +2,10 @@
 #include <random>
 #include "PoincareCoord.hpp"
 
-ObstacleManager::ObstacleManager(void) {}
+ObstacleManager::ObstacleManager(void)
+	: m_timeOfLastSpawn(0)
+{}
+
 ObstacleManager::~ObstacleManager(void) {}
 
 void	ObstacleManager::removeDespawned(void)
@@ -13,6 +16,22 @@ void	ObstacleManager::removeDespawned(void)
 			it = m_obstacles.erase(it);
 		else
 			++it;
+	}
+}
+
+void	ObstacleManager::spawn(float timeElapsed)
+{
+	if (m_timeOfLastSpawn == 0 && timeElapsed >= 3)
+	{
+		for (int i = 0; i < 4; ++i)
+			spawnRandom();
+		m_timeOfLastSpawn = timeElapsed;
+	}
+	else if (timeElapsed - m_timeOfLastSpawn > 2)
+	{
+		for (int i = 0; i < 4; ++i)
+			spawnRandom();
+		m_timeOfLastSpawn = timeElapsed;
 	}
 }
 

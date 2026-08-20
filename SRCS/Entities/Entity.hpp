@@ -33,7 +33,7 @@ class	Entity
 
 		void					setHitboxColor(const Color& color);
 
-	private:
+	protected:
 		MinkowskiCoord				m_pos;
 		std::unique_ptr<Texture2D>	m_texturePtr;
 		float						m_textureExtent;

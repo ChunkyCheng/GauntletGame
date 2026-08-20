@@ -4,11 +4,18 @@
 
 Player::Player(void)
 	: Entity(0, 0, "textures/wau.png", 0.3, {0, 0.02}, 0.2)
+	, m_isAlive(true)
 {
 }
 
 Player::~Player(void)
 {
+}
+
+void	Player::reset(void)
+{
+	m_isAlive = true;
+	m_pos = MinkowskiCoord(0, 0);
 }
 
 void	Player::updatePos(float dt)

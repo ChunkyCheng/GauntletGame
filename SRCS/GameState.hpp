@@ -1,5 +1,13 @@
 #pragma once
 
+#include "Player.hpp"
+#include "ObstacleManager.hpp"
+#include "Renderer.hpp"
+
+constexpr int	WIN_WIDTH = 1280;
+constexpr int	WIN_HEIGHT = 800;
+constexpr int	MAP_RADIUS = WIN_HEIGHT / 2 - 10;
+
 class	GameState
 {
 	public:
@@ -8,9 +16,32 @@ class	GameState
 		GameState&	operator=(const GameState& other);
 		~GameState(void);
 
-		bool	showDebug(void)	const;
-	protected:
+		void	runGameEvents(void);
+		void	runInitState(void);
+		void	runInGameState(void);
+		void	runGameOverState(void);
+
+		enum	PlayState
+		{
+			Init,
+			InGame,
+			GameOver
+		};
+	
+		PlayState	playState(void) const;
+		bool		showDebug(void)	const;
+
 	private:
-		bool	m_showDebug;
+		PlayState	m_playState;
+		float		m_gameStartTime;
+		float		m_timeElapsed;
+		int			m_score;
+		int			m_highScore;
+
+		Player			m_player;
+		ObstacleManager	m_obstacleManager;
+		Renderer		m_renderer;
+		
+		bool		m_showDebug;
 };
 
