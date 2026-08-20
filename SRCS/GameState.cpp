@@ -82,16 +82,20 @@ void	GameState::runGameOverState(void)
 {
 	if (IsKeyPressed(KEY_ENTER))
 	{
-		m_playState = GameState::InGame;
+		m_playState = GameState::InGame;		
 		m_player.reset();
 		m_obstacleManager.reset();
+		if (m_score > m_highScore)
+			m_highScore = m_score;
 		m_gameStartTime = GetTime();
 	}
-	std::string	scoreString = "Score: " + std::to_string(m_score);
 	BeginDrawing();
 	ClearBackground(BLACK);
-	int	textWidth = MeasureText(scoreString.c_str(), 50);
-	DrawText(scoreString.c_str(), (WIN_WIDTH - textWidth) / 2, WIN_HEIGHT / 2, 50, YELLOW);
+	m_renderer.renderTextCentered("Score: " + std::to_string(m_score), WIN_WIDTH / 2, WIN_HEIGHT / 2, 50, YELLOW);
+	if (m_score > m_highScore)
+		m_renderer.renderTextCentered("New High Score!", WIN_WIDTH / 2, WIN_HEIGHT / 2 + 50, 50, YELLOW);
+	else
+		m_renderer.renderTextCentered("High score: " + std::to_string(m_highScore), WIN_WIDTH / 2, WIN_HEIGHT / 2 + 50, 20, WHITE);
 	EndDrawing();
 }
 

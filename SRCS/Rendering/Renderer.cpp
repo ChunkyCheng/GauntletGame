@@ -6,6 +6,15 @@ Renderer::Renderer(const GameState& gameState)
 	: m_gameState(gameState)
 {}
 Renderer::~Renderer(void) {}
+
+
+void	Renderer::renderTextCentered(const std::string& text, int posX, int posY, int fontSize, Color color)
+{
+	int	textWidth = MeasureText(text.c_str(), fontSize);
+
+	DrawText(text.c_str(), posX - textWidth / 2, posY, fontSize, color)	;
+}
+
 void	Renderer::renderEntity(Vector2 diskCenter, float diskRadius, const Entity& entity)
 {
 	m_mapShader.setDiskCenter(diskCenter.x, diskCenter.y);

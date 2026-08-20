@@ -15,6 +15,7 @@ class	Renderer
 		Renderer&	operator=(const Renderer& other);
 		~Renderer(void);
 
+		void	renderTextCentered(const std::string& text, int posX, int posY, int fontSize, Color color);
 		void	renderEntity(Vector2 diskCenter, float diskRadius, const Entity& entity);
 		void	renderEntityTextured(Vector2 diskCenter, float diskRadius, const Entity& entity);
 		void	renderEntityHitbox(Vector2 diskCenter, float diskRadius, const Entity& entity);
