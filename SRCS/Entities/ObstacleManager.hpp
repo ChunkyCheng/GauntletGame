@@ -1,10 +1,11 @@
 #pragma once
 
+#include "EntityManager.hpp"
 #include <memory>
 #include <vector>
 #include <Obstacle.hpp>
 
-class	ObstacleManager
+class	ObstacleManager : public EntityManager
 {
 	public:
 		ObstacleManager(void);
@@ -12,16 +13,8 @@ class	ObstacleManager
 		ObstacleManager&	operator=(const ObstacleManager& other);
 		~ObstacleManager(void);
 
-		void	reset(void);
-		void	removeDespawned(void);
-		void	spawn(float timeElapsed);
-		void	spawnRandom(void);
+		void	spawnRandom(void) override;
 
-		const std::vector<std::unique_ptr<Obstacle>>&	obstacles(void) const;
 
-	protected:
-	private:
-		std::vector<std::unique_ptr<Obstacle>>	m_obstacles;
-		float									m_timeOfLastSpawn;
 };
 

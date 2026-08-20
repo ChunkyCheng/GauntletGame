@@ -2,6 +2,7 @@
 
 #include "Player.hpp"
 #include "ObstacleManager.hpp"
+#include "DecorationManager.hpp"
 #include "Renderer.hpp"
 
 constexpr int	WIN_WIDTH = 1280;
@@ -37,10 +38,10 @@ class	GameState
 		int			m_score;
 		int			m_highScore;
 
-		Player			m_player;
-		ObstacleManager	m_obstacleManager;
-		ObstacleManager m_decorationManager;
-		Renderer		m_renderer;
+		Player				m_player;
+		ObstacleManager		m_obstacleManager;
+		DecorationManager	m_decorationManager;
+		Renderer			m_renderer;
 		
 		bool		m_showDebug;
 };

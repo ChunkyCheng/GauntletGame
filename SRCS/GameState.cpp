@@ -49,11 +49,15 @@ void	GameState::runInGameState(void)
 	
 	float	dt = GetFrameTime();
 	m_player.updatePos(dt);
-	for (auto& e : m_obstacleManager.obstacles())
+	for (auto& e : m_obstacleManager.entities())
+		e->updatePos(dt);
+	for (auto& e : m_decorationManager.entities())
 		e->updatePos(dt);
 	m_obstacleManager.removeDespawned();
+	m_decorationManager.removeDespawned();
 	m_obstacleManager.spawn(timeElapsed);
-	m_player.runCollisionEvents(m_obstacleManager.obstacles());
+	m_decorationManager.spawn(timeElapsed);
+	m_player.runCollisionEvents(m_obstacleManager.entities());
 	if (!m_player.isAlive())
 	{
 		m_playState = GameState::GameOver;
@@ -61,18 +65,25 @@ void	GameState::runInGameState(void)
 	}
 	BeginDrawing();
 	ClearBackground(BLACK);
-	
+
+	DrawCircle(WIN_WIDTH / 2, WIN_HEIGHT / 2, MAP_RADIUS, BLUE);
 	m_renderer.renderMap(
 		{WIN_WIDTH / 2, WIN_HEIGHT / 2},
 		MAP_RADIUS,
-		m_obstacleManager.obstacles()
+		m_decorationManager.entities()
+	);
+	m_renderer.renderMap(
+		{WIN_WIDTH / 2, WIN_HEIGHT / 2},
+		MAP_RADIUS,
+		m_obstacleManager.entities()
 	);
 	m_renderer.renderEntity(
 		{WIN_WIDTH / 2, WIN_HEIGHT / 2},
 		MAP_RADIUS,
 		m_player
 	);
-	DrawFPS(5, 5);
+	if (m_showDebug)
+		DrawFPS(5, 5);
 	DrawText(("Score: " + std::to_string(m_score)).c_str(), 10, 50, 20, WHITE);
 
 	EndDrawing();
@@ -86,6 +97,7 @@ void	GameState::runGameOverState(void)
 		m_playState = GameState::InGame;		
 		m_player.reset();
 		m_obstacleManager.reset();
+		m_decorationManager.reset();
 		if (m_score > m_highScore)
 			m_highScore = m_score;
 		m_gameStartTime = GetTime();

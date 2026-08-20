@@ -1,14 +1,14 @@
 NAME	=	HyperLong
 
 CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17 -fsanitize=address
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17 #-fsanitize=address
 
 HYPERBOLICS_DIR		=	Hyperbolics
 HYPERBOLICS_FILES	=	MinkowskiCoord.cpp	PoincareCoord.cpp
 
 ENTITIES_DIR		=	Entities
-ENTITIES_FILES		=	Entity.cpp			ObstacleManager.cpp			Player.cpp	\
-						Obstacle.cpp
+ENTITIES_FILES		=	Entity.cpp			EntityManager.cpp			ObstacleManager.cpp \
+						Player.cpp			DecorationManager.cpp		Obstacle.cpp
 
 RENDERING_DIR		=	Rendering
 RENDERING_FILES		=	ShaderRaii.cpp		PoincareWarpShader.cpp		Renderer.cpp
