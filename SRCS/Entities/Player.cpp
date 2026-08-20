@@ -34,12 +34,10 @@ void	Player::updatePos(float dt)
 		move.y /= root2;
 	}
 
-	MinkowskiCoord	temp = m_pos;
-
-	temp.moveXHyperbolic(move.x * dt);
-	temp.moveYHyperbolic(move.y * dt);
-	if (temp.hDist(MinkowskiCoord(0, 0)) < 2)
-		m_pos = temp;
+	m_pos.moveXHyperbolic(move.x * dt);
+	m_pos.moveYHyperbolic(move.y * dt);
+	if (m_pos.hDist(MinkowskiCoord(0, 0)) > 4)
+		m_isAlive = false;
 }
 
 void	Player::collisionEvent(const Entity& other)
