@@ -1,4 +1,4 @@
-NAME	=	HyperLong
+NAME	=	HyperWau
 
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17 #-fsanitize=address
