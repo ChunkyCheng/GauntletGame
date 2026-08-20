@@ -34,12 +34,12 @@ class	GameState
 	private:
 		PlayState	m_playState;
 		float		m_gameStartTime;
-		float		m_timeElapsed;
 		int			m_score;
 		int			m_highScore;
 
 		Player			m_player;
 		ObstacleManager	m_obstacleManager;
+		ObstacleManager m_decorationManager;
 		Renderer		m_renderer;
 		
 		bool		m_showDebug;

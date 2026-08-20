@@ -5,7 +5,7 @@
 GameState::GameState(void)
 	: m_playState(GameState::Init)
 	, m_gameStartTime(0)
-	, m_timeElapsed(0)
+	, m_highScore(0)
 	, m_renderer(*this)
 	, m_showDebug(false)
 {}
@@ -38,6 +38,7 @@ void	GameState::runInitState(void)
 	}
 	BeginDrawing();
 	ClearBackground(BLACK);
+	m_renderer.renderTextCentered("Press Enter to Start", WIN_WIDTH / 2, WIN_HEIGHT / 2, 50, WHITE);
 	EndDrawing();
 }
 
@@ -91,11 +92,12 @@ void	GameState::runGameOverState(void)
 	}
 	BeginDrawing();
 	ClearBackground(BLACK);
-	m_renderer.renderTextCentered("Score: " + std::to_string(m_score), WIN_WIDTH / 2, WIN_HEIGHT / 2, 50, YELLOW);
+	m_renderer.renderTextCentered("Score: " + std::to_string(m_score), WIN_WIDTH / 2, WIN_HEIGHT / 2 - 50, 50, YELLOW);
 	if (m_score > m_highScore)
-		m_renderer.renderTextCentered("New High Score!", WIN_WIDTH / 2, WIN_HEIGHT / 2 + 50, 50, YELLOW);
+		m_renderer.renderTextCentered("New High Score!", WIN_WIDTH / 2, WIN_HEIGHT / 2, 50, YELLOW);
 	else
-		m_renderer.renderTextCentered("High score: " + std::to_string(m_highScore), WIN_WIDTH / 2, WIN_HEIGHT / 2 + 50, 20, WHITE);
+		m_renderer.renderTextCentered("High score: " + std::to_string(m_highScore), WIN_WIDTH / 2, WIN_HEIGHT / 2, 20, WHITE);
+	m_renderer.renderTextCentered("Press Enter to Play Again", WIN_WIDTH / 2, WIN_HEIGHT / 2 + 70, 20, WHITE);
 	EndDrawing();
 }
 
