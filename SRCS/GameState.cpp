@@ -39,6 +39,7 @@ void	GameState::runInitState(void)
 	BeginDrawing();
 	ClearBackground(BLACK);
 	m_renderer.renderTextCentered("Press Enter to Start", WIN_WIDTH / 2, WIN_HEIGHT / 2, 50, WHITE);
+	m_renderer.renderTextCentered("Use the arrow keys to move", WIN_WIDTH / 2, WIN_HEIGHT / 2 + 60, 30, WHITE);
 	EndDrawing();
 }
 
