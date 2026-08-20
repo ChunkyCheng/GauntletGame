@@ -34,8 +34,12 @@ void	Player::updatePos(float dt)
 		move.y /= root2;
 	}
 
-	moveX(move.x * dt);
-	moveY(move.y * dt);
+	MinkowskiCoord	temp = m_pos;
+
+	temp.moveXHyperbolic(move.x * dt);
+	temp.moveYHyperbolic(move.y * dt);
+	if (temp.hDist(MinkowskiCoord(0, 0)) < 2)
+		m_pos = temp;
 }
 
 void	Player::collisionEvent(const Entity& other)

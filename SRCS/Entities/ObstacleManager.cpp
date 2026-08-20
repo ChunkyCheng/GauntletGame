@@ -8,6 +8,12 @@ ObstacleManager::ObstacleManager(void)
 
 ObstacleManager::~ObstacleManager(void) {}
 
+void	ObstacleManager::reset(void)
+{
+	m_obstacles.clear();
+	m_timeOfLastSpawn = 0;
+}
+
 void	ObstacleManager::removeDespawned(void)
 {
 	for (auto it = m_obstacles.begin(); it != m_obstacles.end();)
@@ -49,7 +55,7 @@ void	ObstacleManager::spawnRandom(void)
 		texturePath = "textures/helicopter-right.png";
 	else
 		texturePath = "textures/helicopter-left.png";
-	m_obstacles.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), texturePath, 1.5, angle, 0.3));
+	m_obstacles.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), texturePath, 1.5, angle, 0.5));
 
 }
 

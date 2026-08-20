@@ -12,6 +12,7 @@ class	ObstacleManager
 		ObstacleManager&	operator=(const ObstacleManager& other);
 		~ObstacleManager(void);
 
+		void	reset(void);
 		void	removeDespawned(void);
 		void	spawn(float timeElapsed);
 		void	spawnRandom(void);

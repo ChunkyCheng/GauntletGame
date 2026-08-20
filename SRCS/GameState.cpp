@@ -84,6 +84,7 @@ void	GameState::runGameOverState(void)
 	{
 		m_playState = GameState::InGame;
 		m_player.reset();
+		m_obstacleManager.reset();
 		m_gameStartTime = GetTime();
 	}
 	std::string	scoreString = "Score: " + std::to_string(m_score);
