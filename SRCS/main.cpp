@@ -10,7 +10,7 @@ int	main(void)
 {
 	std::srand(std::time(0));
 	SetTraceLogLevel(LOG_WARNING);
-	InitWindow(WIN_WIDTH, WIN_HEIGHT, "hyper_long");
+	InitWindow(WIN_WIDTH, WIN_HEIGHT, "Hyper Wau");
 	SetTargetFPS(60);
 	{
 		GameState		gameState;
