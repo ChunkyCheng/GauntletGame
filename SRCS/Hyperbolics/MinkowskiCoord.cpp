@@ -64,6 +64,26 @@ void	MinkowskiCoord::moveYHyperbolic(float dist)
 	m_z = std::sqrt(m_x * m_x + m_y * m_y + 1);
 }
 
+void	MinkowskiCoord::moveHyperbolic(float dist, float theta)
+{
+	float	sinhD = std::sinh(dist);
+	float	RQ[3] = {sinhD * std::cos(theta), sinhD * std::sin(theta), std::cosh(dist)};
+	float	invR1[3] = {
+		m_z + m_y * m_y  * m_z / (m_z + 1) - m_y * m_y,
+		m_x * m_y / (m_z + 1),
+		m_x
+	};
+	float	invR2[3] = {
+		invR1[1],
+		m_z + m_x * m_x * m_z / (m_z + 1) - m_x * m_x,
+		m_y
+	};
+
+	m_x = RQ[0] * invR1[0] + RQ[1] * invR1[1] + RQ[2] * invR1[2];
+	m_y = RQ[0] * invR2[0] + RQ[1] * invR2[1] + RQ[2] * invR2[2];
+	m_z = std::sqrt(m_x * m_x + m_y * m_y + 1);
+}
+
 void	MinkowskiCoord::setXY(float x, float y)
 {
 	m_x = x;

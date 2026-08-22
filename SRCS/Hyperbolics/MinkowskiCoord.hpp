@@ -21,6 +21,7 @@ class	MinkowskiCoord
 
 		void	moveXHyperbolic(float dist);
 		void	moveYHyperbolic(float dist);
+		void	moveHyperbolic(float dist, float degrees);
 		void	setXY(float x, float y);
 		float	x(void) const;
 		float	y(void) const;
