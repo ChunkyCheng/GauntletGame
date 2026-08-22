@@ -32,6 +32,7 @@ void	Entity::collisionEvent(const Entity& other)
 void	Entity::updatePos(float dt) { (void)dt; }
 void	Entity::moveX(float dist) { m_pos.moveXHyperbolic(dist); }
 void	Entity::moveY(float dist) { m_pos.moveYHyperbolic(dist); }
+void	Entity::move(float dist, float degrees) { m_pos.moveHyperbolic(dist, degrees * DEG2RAD); }
 
 const MinkowskiCoord&	Entity::pos(void) const { return m_pos; }
 const Texture&			Entity::texture(void) const { return *m_texturePtr; }

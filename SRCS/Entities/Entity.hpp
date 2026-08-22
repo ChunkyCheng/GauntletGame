@@ -18,6 +18,7 @@ class	Entity
 		virtual	void	updatePos(float dt);
 		void			moveX(float dist);
 		void			moveY(float dist);
+		void			move(float dist, float degrees);
 	
 		bool						collides(const Entity& other) const;
 		template<typename T>void	runCollisionEvents(const T& others);
