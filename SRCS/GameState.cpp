@@ -1,14 +1,33 @@
 #include "GameState.hpp"
 #include "raylib.h"
 #include <iostream>
+#include <fstream>
 
 GameState::GameState(void)
 	: m_playState(GameState::Init)
 	, m_gameStartTime(0)
-	, m_highScore(0)
+	, m_score(0)
 	, m_renderer(*this)
 	, m_showDebug(false)
 {
+	std::ifstream	saveFile("save.hyperwau");
+
+	if (!saveFile.is_open())
+		m_highScore = 0;
+	else
+	{
+		std::string	saveData;
+
+		std::getline(saveFile, saveData);
+		try
+		{
+			m_highScore = std::stoi(saveData);
+		}
+		catch (std::exception& e)
+		{
+			m_highScore = 0;
+		}
+	}
 	InitAudioDevice();
 	m_sfxGameEnd = LoadSound("sfx/game_over.mp3");
 	m_sfxNewHighScore = LoadSound("sfx/new_high_score.mp3");
@@ -19,6 +38,15 @@ GameState::~GameState(void)
 	UnloadSound(m_sfxNewHighScore);
 	UnloadSound(m_sfxGameEnd);
 	CloseAudioDevice();
+
+	std::ofstream	saveFile("save.hyperwau");
+
+	if (m_score > m_highScore)
+		m_highScore = m_score;
+	if (saveFile.is_open())
+		saveFile << std::to_string(m_highScore);
+	else
+		std::cerr << "Failed to save high score" << std::endl;
 }
 
 void	GameState::runGameEvents(void)
