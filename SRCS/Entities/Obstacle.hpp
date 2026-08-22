@@ -17,5 +17,7 @@ class	Obstacle : public Entity
 	protected:
 	private:
 		Vector2	m_moveVector;
+		float	m_moveSpeed;
+		float	m_moveAngle;
 		bool	m_shouldDespawn;
 };
