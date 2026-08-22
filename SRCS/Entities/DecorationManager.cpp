@@ -16,5 +16,7 @@ void	DecorationManager::spawnRandom(void)
 
 	MinkowskiCoord	pos = PoincareCoord(x, y).toMinkowski();
 	angle += 2 / (std::rand() % 10 + 1) - 1;
-	m_entities.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), "textures/cloud-transparent.png", 0.5, angle, 0.2));
+	float	speed = (std::rand() % 5) / 4 * 0.2 + 0.3;
+	float	size = (std::rand() % 10) / 9 * 0.2 + 0.1;
+	m_entities.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), "textures/cloud-transparent.png", speed, angle, size));
 }
