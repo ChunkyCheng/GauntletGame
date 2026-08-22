@@ -42,7 +42,10 @@ class	GameState
 		ObstacleManager		m_obstacleManager;
 		DecorationManager	m_decorationManager;
 		Renderer			m_renderer;
-		
+
+		Sound		m_sfxGameEnd;
+		Sound		m_sfxNewHighScore;
+
 		bool		m_showDebug;
 };
 

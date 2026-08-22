@@ -10,10 +10,14 @@ GameState::GameState(void)
 	, m_showDebug(false)
 {
 	InitAudioDevice();
+	m_sfxGameEnd = LoadSound("sfx/game_over.mp3");
+	m_sfxNewHighScore = LoadSound("sfx/new_high_score.mp3");
 }
 
 GameState::~GameState(void)
 {
+	UnloadSound(m_sfxNewHighScore);
+	UnloadSound(m_sfxGameEnd);
 	CloseAudioDevice();
 }
 
@@ -67,7 +71,12 @@ void	GameState::runInGameState(void)
 	m_player.runCollisionEvents(m_obstacleManager.entities());
 	if (!m_player.isAlive())
 	{
-		SetMasterVolume(0);
+		m_player.reset();
+		m_obstacleManager.reset();
+		m_decorationManager.reset();
+		if (m_score > m_highScore)
+			PlaySound(m_sfxNewHighScore);
+		PlaySound(m_sfxGameEnd);
 		m_playState = GameState::GameOver;
 		return ;
 	}
@@ -95,7 +104,6 @@ void	GameState::runInGameState(void)
 	DrawText(("Score: " + std::to_string(m_score)).c_str(), 10, 50, 20, WHITE);
 
 	EndDrawing();
-
 }
 
 void	GameState::runGameOverState(void)
@@ -103,13 +111,9 @@ void	GameState::runGameOverState(void)
 	if (IsKeyPressed(KEY_ENTER))
 	{
 		m_playState = GameState::InGame;		
-		m_player.reset();
-		m_obstacleManager.reset();
-		m_decorationManager.reset();
 		if (m_score > m_highScore)
 			m_highScore = m_score;
 		m_gameStartTime = GetTime();
-		SetMasterVolume(1.0f);
 	}
 	BeginDrawing();
 	ClearBackground(BLACK);
