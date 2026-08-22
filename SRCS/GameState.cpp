@@ -8,8 +8,14 @@ GameState::GameState(void)
 	, m_highScore(0)
 	, m_renderer(*this)
 	, m_showDebug(false)
-{}
-GameState::~GameState(void) {}
+{
+	InitAudioDevice();
+}
+
+GameState::~GameState(void)
+{
+	CloseAudioDevice();
+}
 
 void	GameState::runGameEvents(void)
 {
@@ -61,6 +67,7 @@ void	GameState::runInGameState(void)
 	m_player.runCollisionEvents(m_obstacleManager.entities());
 	if (!m_player.isAlive())
 	{
+		SetMasterVolume(0);
 		m_playState = GameState::GameOver;
 		return ;
 	}
@@ -102,6 +109,7 @@ void	GameState::runGameOverState(void)
 		if (m_score > m_highScore)
 			m_highScore = m_score;
 		m_gameStartTime = GetTime();
+		SetMasterVolume(1.0f);
 	}
 	BeginDrawing();
 	ClearBackground(BLACK);

@@ -1,7 +1,7 @@
 NAME	=	HyperWau
 
 CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17 #-fsanitize=address
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17 -fsanitize=address
 
 HYPERBOLICS_DIR		=	Hyperbolics
 HYPERBOLICS_FILES	=	MinkowskiCoord.cpp	PoincareCoord.cpp

@@ -20,4 +20,6 @@ class	Obstacle : public Entity
 		float	m_moveSpeed;
 		float	m_moveAngle;
 		bool	m_shouldDespawn;
+		Music	m_sfx;
+		float	m_sfxVolumeEx;
 };
