@@ -22,12 +22,12 @@ void	ObstacleManager::spawnRandom(void)
 	else
 		texturePath = "textures/helicopter-left.png";
 	
-	float	speed = 1.5;
+	float	speed = 1.7;
 	float	size = 0.5;
 	if ((std::rand() % 20) == 0)
 	{	
 		speed = 0.8;
-		size = 1;
+		size = 0.9;
 	}
 	m_entities.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), texturePath, speed, angle, size));
 }
