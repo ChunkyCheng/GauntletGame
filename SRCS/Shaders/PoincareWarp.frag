@@ -32,7 +32,12 @@ void main(void)
 	float	lX = dot(objInvFrameRowX, minkowski);
 	float	lY = dot(objInvFrameRowY, minkowski);
 	float	lZ = sqrt(lX * lX + lY * lY + 1.0);
-	vec2	local = vec2(lX, lY) / (lZ + 1.0);
+	vec2	local = vec2(lX, lY);
+
+	if (drawMode == 0)
+		local /= lZ;
+	else
+		local /= lZ + 1;
 
 	if (drawMode == 0)	
 		local -= textureOffset;
