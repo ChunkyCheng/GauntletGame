@@ -61,7 +61,7 @@ void	Player::updateXHeading(void)
 		m_xHeading = 0;
 	else
 	{
-		float	gradient = m_pos.x() * m_pos.y() / (m_pos.z() - m_pos.x() - 1);
+		float	gradient = m_pos.x() * m_pos.y() / (m_pos.z() + m_pos.x() * m_pos.x() - 1);
 		m_xHeading = std::atan(gradient);
 	}
 }
@@ -72,7 +72,7 @@ void	Player::updateYHeading(void)
 		m_yHeading = PI / 2;
 	else
 	{
-		float	gradient = m_pos.x() * m_pos.y() / (m_pos.z() - m_pos.y() - 1);
+		float	gradient = m_pos.x() * m_pos.y() / (m_pos.z() + m_pos.y() * m_pos.y() - 1);
 		m_yHeading = PI / 2 - std::atan(gradient);
 	}
 }
