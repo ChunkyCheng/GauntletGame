@@ -23,35 +23,26 @@ void	Player::reset(void)
 
 void	Player::updatePos(float dt)
 {
+	Vector2	inputVector = {0, 0};
+
+	if (IsKeyDown(KEY_UP))		inputVector.y += 1;
+	if (IsKeyDown(KEY_DOWN))	inputVector.y -= 1;
+	if (IsKeyDown(KEY_LEFT))	inputVector.x -= 1;
+	if (IsKeyDown(KEY_RIGHT))	inputVector.x += 1;
+	if (!inputVector.x && !inputVector.y)
+		return ;
+
+	float	inputAngle = std::atan2(inputVector.y, inputVector.x);
+	float	sin = std::sin(inputAngle);
+	float	cos = std::cos(inputAngle);
+	Vector2	normal = {
+		-(m_pos.y() * m_pos.y() + m_pos.z() + 1) * sin - m_pos.x() * m_pos.y() * cos,
+		(m_pos.x() * m_pos.x() + m_pos.z() + 1) * cos + m_pos.x() * m_pos.y() * sin
+	};
+	float	heading = std::atan2(-normal.x, normal.y);
+	
 	float	dist = PLAYER_MOVE_DIST * dt;
-
-	if (IsKeyDown(KEY_UP))		m_pos.moveHyperbolic(dist, m_yHeading);
-	if (IsKeyDown(KEY_DOWN))	m_pos.moveHyperbolic(-dist, m_yHeading);
-	if (IsKeyDown(KEY_LEFT))	m_pos.moveHyperbolic(-dist, m_xHeading);
-	if (IsKeyDown(KEY_RIGHT))	m_pos.moveHyperbolic(dist, m_xHeading);
-	if (IsKeyDown(KEY_R)) m_isAlive = false;
-
-	updateXHeading();
-	updateYHeading();
-
-	// Vector2	move = {0, 0};
-
-	// if (IsKeyDown(KEY_UP))		move.y += PLAYER_MOVE_DIST;
-	// if (IsKeyDown(KEY_DOWN))	move.y -= PLAYER_MOVE_DIST;
-	// if (IsKeyDown(KEY_LEFT))	move.x -= PLAYER_MOVE_DIST;
-	// if (IsKeyDown(KEY_RIGHT))	move.x += PLAYER_MOVE_DIST;
-
-	// if (move.x != 0 && move.y != 0)
-	// {
-	// 	float root2 = std::sqrt(2);
-	// 	move.x /= root2;
-	// 	move.y /= root2;
-	// }
-
-	// m_pos.moveXHyperbolic(move.x * dt);
-	// m_pos.moveYHyperbolic(move.y * dt);
-	// if (m_pos.hDist(MinkowskiCoord(0, 0)) > 4)
-	// 	m_isAlive = false;
+	m_pos.moveHyperbolic(dist, heading);
 }
 
 void	Player::updateXHeading(void)
