@@ -45,29 +45,6 @@ void	Player::updatePos(float dt)
 	m_pos.moveHyperbolic(dist, heading);
 }
 
-void	Player::updateXHeading(void)
-{
-
-	if (std::fabs(m_pos.x() * m_pos.y()) <= 1e-4f)
-		m_xHeading = 0;
-	else
-	{
-		float	gradient = m_pos.x() * m_pos.y() / (m_pos.x() * m_pos.x() + m_pos.z() + 1);
-		m_xHeading = std::atan(gradient);
-	}
-}
-
-void	Player::updateYHeading(void)
-{
-	if (std::fabs(m_pos.x() * m_pos.y()) <= 1e-4f)
-		m_yHeading = PI / 2;
-	else
-	{
-		float	gradient = m_pos.x() * m_pos.y() / (m_pos.y() * m_pos.y() + m_pos.z() + 1);
-		m_yHeading = PI / 2 - std::atan(gradient);
-	}
-}
-
 void	Player::collisionEvent(const Entity& other)
 {
 	(void)other;

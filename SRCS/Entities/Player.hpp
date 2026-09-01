@@ -14,15 +14,11 @@ class	Player : public Entity
 
 		void	reset(void);
 		void	updatePos(float dt);
-		void	updateXHeading(void);
-		void	updateYHeading(void);
 		void	collisionEvent(const Entity& other);
 	
 		bool	isAlive(void) const;
 
 	private:
 		bool	m_isAlive;
-		float	m_xHeading;
-		float	m_yHeading;
 };
 
