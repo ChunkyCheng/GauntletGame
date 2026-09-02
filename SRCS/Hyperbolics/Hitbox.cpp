@@ -1,5 +1,8 @@
 #include "Hitbox.hpp"
+#include <iostream>
+#include <cmath>
 #include "MinkowskiCoord.hpp"
+#include "KleinCoord.hpp"
 
 struct	HyperbolicRect
 {
@@ -12,37 +15,36 @@ Hitbox::Hitbox(float width, float height)
 	, m_height(height)
 {}
 
-Hitbox::Hitbox(const Hitbox& other) = default;
-
-Hitbox::~Hitbox(void) {}
-
-static HyperbolicRect	toHyperbolicRect(const Hitbox& hitbox, const MinkowskiCoord& pos)
+bool	isPointInRect(const KleinCoord& topLeft, const KleinCoord& botRight, const KleinCoord& point)
 {
-	MinkowskiCoord topLeft(0, 0);
-	MinkowskiCoord botRight(0, 0);
+	if (point.x() > topLeft.x() && point.x() < botRight.x() && point.y() < topLeft.y() && point.y() > botRight.y())
+		return true;
+	return false;
+}
 
-	topLeft.moveHyperbolic(hitbox.height() / 2, PI / 2);
-	topLeft.moveHyperbolic(hitbox.width() / 2, PI);
-	topLeft = topLeft.inverseRelativeTo(pos);
-	botRight.moveHyperbolic(hitbox.height() / 2, -PI / 2);
-	botRight.moveHyperbolic(hitbox.width() / 2, 0);
-	botRight = botRight.inverseRelativeTo(pos);
+bool	cornerCollides(const Hitbox& hitbox, const MinkowskiCoord& pos, const Hitbox& other, const MinkowskiCoord& otherPos)
+{
+	KleinCoord	kleinTopLeft(-std::tanh(hitbox.width() / 2), std::tanh(hitbox.height() / 2));
+	KleinCoord	kleinBotRight(-kleinTopLeft.x(), -kleinTopLeft.y());
 
-	return {
-		{topLeft.x(), topLeft.y()},
-		{botRight.x(), botRight.y()}
-	};
+	KleinCoord	otherKleinCorner(-std::tanh(other.width() / 2), -std::tanh(other.height() / 2));
+	MinkowskiCoord	otherMinkowskiCorner1 = otherKleinCorner.toMinkowski();
+	MinkowskiCoord	otherMinkowskiCorner2 = KleinCoord(-otherKleinCorner.x(), otherKleinCorner.y()).toMinkowski();
+	MinkowskiCoord	otherMinkowskiCorner3 = KleinCoord(otherKleinCorner.x(), -otherKleinCorner.y()).toMinkowski();
+	MinkowskiCoord	otherMinkowskiCorner4 = KleinCoord(-otherKleinCorner.x(), -otherKleinCorner.y()).toMinkowski();
+	
+	if (isPointInRect(kleinTopLeft, kleinBotRight, otherMinkowskiCorner1.inverseRelativeTo(otherPos).relativeTo(pos).toKlein())
+		|| isPointInRect(kleinTopLeft, kleinBotRight, otherMinkowskiCorner2.inverseRelativeTo(otherPos).relativeTo(pos).toKlein())
+		|| isPointInRect(kleinTopLeft, kleinBotRight, otherMinkowskiCorner3.inverseRelativeTo(otherPos).relativeTo(pos).toKlein())
+		|| isPointInRect(kleinTopLeft, kleinBotRight, otherMinkowskiCorner4.inverseRelativeTo(otherPos).relativeTo(pos).toKlein())
+	)
+		return true;
+	return false;
 }
 
 bool	Hitbox::collides(const MinkowskiCoord& pos, const Hitbox& other, const MinkowskiCoord& otherPos) const
 {
-	HyperbolicRect	rectangle1 = toHyperbolicRect(*this, pos);
-	HyperbolicRect	rectangle2 = toHyperbolicRect(other, otherPos);
-
-	if (rectangle1.topLeft.x < rectangle2.botRight.x
-        && rectangle1.botRight.x > rectangle2.topLeft.x
-        && rectangle1.topLeft.y > rectangle2.botRight.y
-        && rectangle1.botRight.y < rectangle2.topLeft.y)
+	if (cornerCollides(*this, pos, other, otherPos) || cornerCollides(other, otherPos, *this, pos))
 		return true;
 	return false;
 }
