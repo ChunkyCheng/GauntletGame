@@ -14,7 +14,8 @@ class	PoincareWarpShader : public ShaderRaii
 		enum	DrawMode
 		{
 			textured,
-			circle
+			circle,
+			rectangle
 		};
 
 		void	setObjInvFrame(Vector3 rowX, Vector3 rowY) const;

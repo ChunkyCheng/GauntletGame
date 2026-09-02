@@ -34,10 +34,10 @@ void main(void)
 	float	lZ = sqrt(lX * lX + lY * lY + 1.0);
 	vec2	local = vec2(lX, lY);
 
-	if (drawMode == 0)
-		local /= lZ;
-	else
+	if (drawMode == 1)
 		local /= lZ + 1;
+	else
+		local /= lZ;
 
 	if (drawMode == 0)	
 		local -= textureOffset;
@@ -56,6 +56,12 @@ void main(void)
 	{
 		if (distance(local, vec2(0.5)) > 0.5)
 	 		discard ;
+		gl_FragColor = vec4(vec3(fragColor.xyz), 0.6);
+	}
+	else if (drawMode == 2)
+	{
+		if (local.x < 0 || local.x >= 1 || local.y < 0 || local.y >= 1)
+			discard ;
 		gl_FragColor = vec4(vec3(fragColor.xyz), 0.6);
 	}
 }
