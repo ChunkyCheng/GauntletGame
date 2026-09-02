@@ -4,6 +4,7 @@
 #include "raylib.h"
 
 class	PoincareCoord;
+class	KleinCoord;
 
 class	MinkowskiCoord
 {
@@ -14,6 +15,7 @@ class	MinkowskiCoord
 		~MinkowskiCoord(void) = default;
 
 		PoincareCoord	toPoincare(void) const;
+		KleinCoord		toKlein(void) const;
 		float			hDist(const MinkowskiCoord& other) const;
 		MinkowskiCoord	relativeTo(const MinkowskiCoord& other) const;
 		MinkowskiCoord	inverseRelativeTo(const MinkowskiCoord& other) const;

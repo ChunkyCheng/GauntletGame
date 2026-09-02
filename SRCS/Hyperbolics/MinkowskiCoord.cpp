@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <cmath>
 #include "PoincareCoord.hpp"
+#include "KleinCoord.hpp"
 
 MinkowskiCoord::MinkowskiCoord(float x, float y)
 	: m_x(x)
@@ -12,6 +13,11 @@ MinkowskiCoord::MinkowskiCoord(float x, float y)
 PoincareCoord	MinkowskiCoord::toPoincare(void) const
 {
 	return PoincareCoord(m_x / (m_z + 1), m_y / (m_z + 1));
+}
+
+KleinCoord	MinkowskiCoord::toKlein(void) const
+{
+	return KleinCoord(m_x / m_z, m_y / m_z);
 }
 
 float	MinkowskiCoord::hDist(const MinkowskiCoord& other) const
