@@ -4,7 +4,7 @@
 #include "PoincareCoord.hpp"
 
 Player::Player(void)
-	: Entity(0, 0, "textures/wau.png", 0.5, {0, 0.04}, 0.2)
+	: Entity(0, 0, "textures/wau.png", {nullptr, {0.5, 0.5}, {0, 0.04}}, 0.2)
 	, m_isAlive(true)
 {
 }
@@ -16,8 +16,6 @@ Player::~Player(void)
 void	Player::reset(void)
 {
 	m_isAlive = true;
-	m_xHeading = 0;
-	m_yHeading = 0;
 	m_pos = MinkowskiCoord(0, 0);
 }
 

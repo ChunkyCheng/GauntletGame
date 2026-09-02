@@ -18,15 +18,15 @@ void	ObstacleManager::spawnRandom(void)
 	angle += 2 / (std::rand() % 10 + 1) - 1;
 	std::string	texturePath;
 	if (angle < 180)
-		texturePath = "textures/helicopter-right.png";
+		texturePath = "textures/nico.png";
 	else
-		texturePath = "textures/helicopter-left.png";
+		texturePath = "textures/nico.png";
 	
 	float	speed = 1.7;
-	float	size = 0.5;
+	float	size = 0.7;
 	if ((std::rand() % 20) == 0)
 	{	
-		speed = 0.8;
+		speed = 0.7;
 		size = 0.9;
 	}
 	m_entities.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), texturePath, speed, angle, size));

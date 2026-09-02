@@ -30,9 +30,9 @@ void	Renderer::renderEntity(Vector2 diskCenter, float diskRadius, const Entity& 
 void	Renderer::renderEntityTextured(Vector2 diskCenter, float diskRadius, const Entity& entity)
 {
 	BeginShaderMode(*m_mapShader);
-	m_mapShader.setHalfExtent(entity.textureExtent() / 2);
+	m_mapShader.setHalfExtent(entity.sprite().extent.x / 2);
 	m_mapShader.setDrawMode(PoincareWarpShader::textured);
-	m_mapShader.setTextureOffset(entity.textureOffset());
+	m_mapShader.setTextureOffset(entity.sprite().offset);
 	Rectangle	src = { 0, 0, (float)entity.texture().width, (float)entity.texture().height };
 	Rectangle	dst = {
 		diskCenter.x - diskRadius,
