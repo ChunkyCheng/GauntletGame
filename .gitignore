@@ -2,3 +2,5 @@ OBJS/
 *.o
 HyperWau
 save.hyperwau
+.*
+!.gitignore
