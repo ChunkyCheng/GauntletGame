@@ -16,6 +16,7 @@ class	MinkowskiCoord
 		PoincareCoord	toPoincare(void) const;
 		float			hDist(const MinkowskiCoord& other) const;
 		MinkowskiCoord	relativeTo(const MinkowskiCoord& other) const;
+		MinkowskiCoord	inverseRelativeTo(const MinkowskiCoord& other) const;
 		Vector3			relativeRowX(void) const;
 		Vector3			relativeRowY(void) const;
 		Vector3			invRelativeRowX(void) const;

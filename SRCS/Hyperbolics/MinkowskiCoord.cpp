@@ -24,12 +24,22 @@ float	MinkowskiCoord::hDist(const MinkowskiCoord& other) const
 //Preserves the x^2 + y^2 + 1 = z^2 relationship
 MinkowskiCoord	MinkowskiCoord::relativeTo(const MinkowskiCoord& other) const
 {
-	Vector3	invRowX = other.relativeRowX();
-	Vector3	invRowY = other.relativeRowY();
+	Vector3	rowX = other.relativeRowX();
+	Vector3	rowY = other.relativeRowY();
 
-	float	x = invRowX.x * m_x + invRowX.y * m_y + invRowX.z * m_z;
-	float	y = invRowY.x * m_x + invRowY.y * m_y + invRowY.z * m_z;
+	float	x = rowX.x * m_x + rowX.y * m_y + rowX.z * m_z;
+	float	y = rowY.x * m_x + rowY.y * m_y + rowY.z * m_z;
 
+	return MinkowskiCoord(x, y);
+}
+
+MinkowskiCoord	MinkowskiCoord::inverseRelativeTo(const MinkowskiCoord& other) const
+{
+	Vector3	rowX = other.invRelativeRowX();
+	Vector3	rowY = other.invRelativeRowY();
+
+	float	x = rowX.x * m_x + rowX.y * m_y + rowX.z * m_z;
+	float	y = rowY.x * m_x + rowY.y * m_y + rowY.z * m_z;
 	return MinkowskiCoord(x, y);
 }
 
