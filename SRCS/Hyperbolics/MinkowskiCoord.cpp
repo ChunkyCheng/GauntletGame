@@ -7,8 +7,7 @@ MinkowskiCoord::MinkowskiCoord(float x, float y)
 	: m_x(x)
 	, m_y(y)
 	, m_z(std::sqrt(x * x + y * y + 1))
-{
-}
+{}
 
 PoincareCoord	MinkowskiCoord::toPoincare(void) const
 {
@@ -34,6 +33,30 @@ MinkowskiCoord	MinkowskiCoord::relativeTo(const MinkowskiCoord& other) const
 	return MinkowskiCoord(x, y);
 }
 
+void	MinkowskiCoord::moveXHyperbolic(float dist)
+{
+	m_x = std::cosh(dist) * m_x + std::sinh(dist) * m_z;
+	m_z = std::sqrt(m_x * m_x + m_y * m_y + 1);
+}
+
+void	MinkowskiCoord::moveYHyperbolic(float dist)
+{
+	m_y = std::cosh(dist) * m_y + std::sinh(dist) * m_z;
+	m_z = std::sqrt(m_x * m_x + m_y * m_y + 1);
+}
+
+void	MinkowskiCoord::moveHyperbolic(float dist, float theta)
+{
+	float	sinhD = std::sinh(dist);
+	float	RQ[3] = {sinhD * std::cos(theta), sinhD * std::sin(theta), std::cosh(dist)};
+	Vector3	invRowX = invRelativeRowX();
+	Vector3 invRowY = invRelativeRowY();
+
+	m_x = RQ[0] * invRowX.x + RQ[1] * invRowX.y + RQ[2] * invRowX.z;
+	m_y = RQ[0] * invRowY.x + RQ[1] * invRowY.y + RQ[2] * invRowY.z;
+	m_z = std::sqrt(m_x * m_x + m_y * m_y + 1);
+}
+
 Vector3	MinkowskiCoord::relativeRowX(void) const
 {
 	return {
@@ -52,36 +75,22 @@ Vector3	MinkowskiCoord::relativeRowY(void) const
 	};
 }
 
-void	MinkowskiCoord::moveXHyperbolic(float dist)
+Vector3	MinkowskiCoord::invRelativeRowX(void) const
 {
-	m_x = std::cosh(dist) * m_x + std::sinh(dist) * m_z;
-	m_z = std::sqrt(m_x * m_x + m_y * m_y + 1);
-}
-
-void	MinkowskiCoord::moveYHyperbolic(float dist)
-{
-	m_y = std::cosh(dist) * m_y + std::sinh(dist) * m_z;
-	m_z = std::sqrt(m_x * m_x + m_y * m_y + 1);
-}
-
-void	MinkowskiCoord::moveHyperbolic(float dist, float theta)
-{
-	float	sinhD = std::sinh(dist);
-	float	RQ[3] = {sinhD * std::cos(theta), sinhD * std::sin(theta), std::cosh(dist)};
-	float	invR1[3] = {
+	return {
 		1 + m_x * m_x / (m_z + 1),
 		m_x * m_y / (m_z + 1),
 		m_x
-	};
-	float	invR2[3] = {
-		invR1[1],
+	};	
+}
+
+Vector3	MinkowskiCoord::invRelativeRowY(void) const
+{
+	return {
+		m_x * m_y / (m_z + 1),
 		1 + m_y * m_y / (m_z + 1),
 		m_y
 	};
-
-	m_x = RQ[0] * invR1[0] + RQ[1] * invR1[1] + RQ[2] * invR1[2];
-	m_y = RQ[0] * invR2[0] + RQ[1] * invR2[1] + RQ[2] * invR2[2];
-	m_z = std::sqrt(m_x * m_x + m_y * m_y + 1);
 }
 
 void	MinkowskiCoord::setXY(float x, float y)

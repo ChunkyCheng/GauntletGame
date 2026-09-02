@@ -18,6 +18,8 @@ class	MinkowskiCoord
 		MinkowskiCoord	relativeTo(const MinkowskiCoord& other) const;
 		Vector3			relativeRowX(void) const;
 		Vector3			relativeRowY(void) const;
+		Vector3			invRelativeRowX(void) const;
+		Vector3			invRelativeRowY(void) const;
 
 		void	moveXHyperbolic(float dist);
 		void	moveYHyperbolic(float dist);
