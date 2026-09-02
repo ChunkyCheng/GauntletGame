@@ -2,9 +2,10 @@
 #include "raylib.h"
 #include <cmath>
 #include "PoincareCoord.hpp"
+#include "TextureManager.hpp"
 
 Player::Player(void)
-	: Entity(0, 0, "textures/wau.png", {nullptr, {0.5, 0.5}, {0, 0.04}}, 0.2)
+	: Entity(0, 0, "textures/wau.png", {static_cast<std::string>(PLAYER_TEXTURE), {0.5, 0.5}, {0, 0.04}}, 0.2)
 	, m_isAlive(true)
 {
 }

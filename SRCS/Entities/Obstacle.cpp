@@ -2,7 +2,7 @@
 #include <cmath>
 
 Obstacle::Obstacle(float x, float y, const std::string& texturePath, float moveSpeed, float moveAngle, float hitboxRadius)
-	: Entity(x, y, texturePath, {nullptr, {hitboxRadius * 1.5f, 0}, {0, 0}}, hitboxRadius)
+	: Entity(x, y, texturePath, {texturePath, {hitboxRadius * 1.5f, 0}, {0, 0}}, hitboxRadius)
 	, m_moveSpeed(moveSpeed)
 	, m_moveAngle(moveAngle)
 	, m_shouldDespawn(false)

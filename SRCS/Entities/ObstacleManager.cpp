@@ -1,6 +1,7 @@
 #include "ObstacleManager.hpp"
 #include <random>
 #include "PoincareCoord.hpp"
+#include "TextureManager.hpp"
 
 ObstacleManager::ObstacleManager(void)
 	: EntityManager(2.5, 4)
@@ -18,9 +19,9 @@ void	ObstacleManager::spawnRandom(void)
 	angle += 2 / (std::rand() % 10 + 1) - 1;
 	std::string	texturePath;
 	if (angle < 180)
-		texturePath = "textures/nico.png";
+		texturePath = HELICOPTER_RIGHT_TEXTURE;
 	else
-		texturePath = "textures/nico.png";
+		texturePath = HELICOPTER_LEFT_TEXTURE;
 	
 	float	speed = 1.7;
 	float	size = 0.7;

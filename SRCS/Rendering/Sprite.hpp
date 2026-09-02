@@ -2,7 +2,7 @@
 
 struct	Sprite
 {
-	Texture2D	*texturePtr;
+	std::string	texturePath;
 	Vector2		extent;
 	Vector2		offset;
 };

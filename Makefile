@@ -8,10 +8,11 @@ HYPERBOLICS_FILES	=	MinkowskiCoord.cpp	PoincareCoord.cpp
 
 ENTITIES_DIR		=	Entities
 ENTITIES_FILES		=	Entity.cpp			EntityManager.cpp			ObstacleManager.cpp \
-						Player.cpp			DecorationManager.cpp		Obstacle.cpp
+						Player.cpp			DecorationManager.cpp		Obstacle.cpp	
 
 RENDERING_DIR		=	Rendering
-RENDERING_FILES		=	ShaderRaii.cpp		PoincareWarpShader.cpp		Renderer.cpp
+RENDERING_FILES		=	ShaderRaii.cpp		PoincareWarpShader.cpp		Renderer.cpp	\
+						TextureManager.cpp
 
 MODULES		=	RENDERING	HYPERBOLICS		ENTITIES
 

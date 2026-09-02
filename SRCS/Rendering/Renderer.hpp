@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "raylib.h"
+#include "TextureManager.hpp"
 #include "PoincareWarpShader.hpp"
 #include "Entity.hpp"
 
@@ -25,7 +26,10 @@ class	Renderer
 	protected:
 	private:
 		const GameState&	m_gameState;
+		TextureManager		m_textureManager;
 		PoincareWarpShader	m_mapShader;
+
+		
 };
 
 #include "Renderer.tpp"
