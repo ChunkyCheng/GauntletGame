@@ -10,7 +10,7 @@
 class	Entity
 {
 	public:
-		Entity(float x, float y, const std::string& texture, Sprite sprite, float hitboxRadius);
+		Entity(float x, float y, Sprite sprite, float hitboxRadius);
 		Entity(const Entity& other);
 		Entity&	operator=(const Entity& other);
 	public:
@@ -26,7 +26,6 @@ class	Entity
 		virtual	void				collisionEvent(const Entity& other);
 
 		const MinkowskiCoord&	pos(void) const;
-		const Texture&			texture(void) const;
 		bool					hasTexture(void) const;
 		const Sprite&			sprite(void) const;
 		float					hitboxRadius(void) const;
@@ -37,7 +36,6 @@ class	Entity
 	protected:
 		MinkowskiCoord				m_pos;
 		Sprite						m_sprite;
-		std::unique_ptr<Texture2D>	m_texturePtr;
 		float						m_hitboxRadius;
 		Color						m_hitboxColor;
 };

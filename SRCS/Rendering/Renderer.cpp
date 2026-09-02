@@ -21,8 +21,7 @@ void	Renderer::renderEntity(Vector2 diskCenter, float diskRadius, const Entity& 
 	m_mapShader.setDiskRadius(diskRadius);
 
 	m_mapShader.setObjInvFrame(entity.pos().inverseRowX(), entity.pos().inverseRowY());
-	if (entity.hasTexture())
-		renderEntityTextured(diskCenter, diskRadius, entity);
+	renderEntityTextured(diskCenter, diskRadius, entity);
 	if (m_gameState.showDebug())
 		renderEntityHitbox(diskCenter, diskRadius, entity);
 }
