@@ -4,7 +4,7 @@ PoincareWarpShader::PoincareWarpShader(void)
 	: ShaderRaii(nullptr, "SRCS/Shaders/PoincareWarp.frag")
 	, m_objInvFrameRowXLoc(GetShaderLocation(**this, "objInvFrameRowX"))
 	, m_objInvFrameRowYLoc(GetShaderLocation(**this, "objInvFrameRowY"))
-	, m_halfExtentLoc(GetShaderLocation(**this, "halfExtent"))
+	, m_extentLoc(GetShaderLocation(**this, "extent"))
 	, m_diskCenterLoc(GetShaderLocation(**this, "diskCenter"))
 	, m_diskRadiusLoc(GetShaderLocation(**this, "diskRadius"))
 	, m_drawModeLoc(GetShaderLocation(**this, "drawMode"))
@@ -25,9 +25,9 @@ void	PoincareWarpShader::setObjInvFrame(Vector3 rowX, Vector3 rowY) const
 	SetShaderValue(**this, m_objInvFrameRowYLoc, arrY, SHADER_UNIFORM_VEC3);
 	
 }
-void	PoincareWarpShader::setHalfExtent(float halfExtent) const
+void	PoincareWarpShader::setExtent(Vector2 extent) const
 {
-	SetShaderValue(**this, m_halfExtentLoc, &halfExtent, SHADER_UNIFORM_FLOAT);
+	SetShaderValue(**this, m_extentLoc, &extent, SHADER_UNIFORM_VEC2);
 }
 
 void	PoincareWarpShader::setDiskCenter(float x, float y) const

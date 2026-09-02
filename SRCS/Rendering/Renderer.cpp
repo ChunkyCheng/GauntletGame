@@ -29,7 +29,7 @@ void	Renderer::renderEntity(Vector2 diskCenter, float diskRadius, const Entity& 
 void	Renderer::renderEntityTextured(Vector2 diskCenter, float diskRadius, const Entity& entity)
 {
 	BeginShaderMode(*m_mapShader);
-	m_mapShader.setHalfExtent(entity.sprite().extent.x / 2);
+	m_mapShader.setExtent(entity.sprite().extent);
 	m_mapShader.setDrawMode(PoincareWarpShader::textured);
 	m_mapShader.setTextureOffset(entity.sprite().offset);
 
@@ -48,7 +48,7 @@ void	Renderer::renderEntityTextured(Vector2 diskCenter, float diskRadius, const 
 void	Renderer::renderEntityHitbox(Vector2 diskCenter, float diskRadius, const Entity& entity)
 {
 	BeginShaderMode(*m_mapShader);
-	m_mapShader.setHalfExtent(std::tanh(entity.hitboxRadius() / 2.0));
+	m_mapShader.setExtent({entity.hitboxRadius(), entity.hitboxRadius()});
 	m_mapShader.setDrawMode(PoincareWarpShader::circle);
 	DrawCircle(diskCenter.x, diskCenter.y, diskRadius, entity.hitboxColor());
 	EndShaderMode();

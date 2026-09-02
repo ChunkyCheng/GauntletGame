@@ -2,7 +2,7 @@
 
 uniform vec3		objInvFrameRowX;
 uniform vec3		objInvFrameRowY; //RowZ for this matrix is ommited as z is recalculated manually
-uniform float		halfExtent;
+uniform vec2		extent;
 uniform vec2		diskCenter;
 uniform float		diskRadius;
 uniform int			drawMode;
@@ -41,7 +41,7 @@ void main(void)
 
 	if (drawMode == 0)	
 		local -= textureOffset;
-	local = local / (2.0 * halfExtent) + 0.5;
+	local = local / extent + 0.5;
 	if (local.x < 0.0 || local.x > 1.0 || local.y < 0.0 || local.y > 1.0)
 		discard ;
 
