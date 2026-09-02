@@ -29,6 +29,7 @@ class	Entity
 		const MinkowskiCoord&	pos(void) const;
 		bool					hasTexture(void) const;
 		const Sprite&			sprite(void) const;
+		const Hitbox&			hitbox(void) const;
 		float					hitboxRadius(void) const;
 		const Color&			hitboxColor(void) const;
 

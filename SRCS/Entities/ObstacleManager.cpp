@@ -4,13 +4,27 @@
 #include "TextureManager.hpp"
 
 ObstacleManager::ObstacleManager(void)
-	: EntityManager(2.5, 4)
-{}
+	: EntityManager(0.1, 1)
+{
+}
 
 ObstacleManager::~ObstacleManager(void) {}
 
 void	ObstacleManager::spawnRandom(void)
 {
+	static int test;
+	if (test)
+		return ;
+
+	m_entities.push_back(std::make_unique<Obstacle>(0, 0, "", 0, 0, 0));
+	m_entities.push_back(std::make_unique<Obstacle>(1.17520119, 0, "", 0, 0, 0));
+	m_entities.push_back(std::make_unique<Obstacle>(-1.17520119, 0, "", 0, 0, 0));
+	m_entities.push_back(std::make_unique<Obstacle>(0, 1.17520119, "", 0, 0, 0));
+	m_entities.push_back(std::make_unique<Obstacle>(0, -1.17520119, "", 0, 0, 0));
+	
+	test = 1;
+	return ;
+
 	float	angle = (std::rand() % 8) * 45;
 	float	x = -std::sin((180 - angle) * DEG2RAD) * 0.99;
 	float	y = std::cos((180 - angle) * DEG2RAD) * 0.99;

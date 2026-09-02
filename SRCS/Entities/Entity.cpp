@@ -10,9 +10,12 @@ Entity::Entity(float x, float y, Sprite sprite, const Hitbox& hitbox, float hitb
 
 bool	Entity::collides(const Entity& other) const
 {
-	if (m_pos.hDist(other.m_pos) < (m_hitboxRadius + other.m_hitboxRadius))
+	if (m_hitbox.collides(m_pos, other.m_hitbox, other.m_pos))
 		return true;
 	return false;
+	// if (m_pos.hDist(other.m_pos) < (m_hitboxRadius + other.m_hitboxRadius))
+	// 	return true;
+	// return false;
 }
 
 void	Entity::collisionEvent(const Entity& other)
@@ -28,6 +31,7 @@ void	Entity::move(float dist, float degrees) { m_pos.moveHyperbolic(dist, degree
 
 const MinkowskiCoord&	Entity::pos(void) const { return m_pos; }
 const Sprite&			Entity::sprite(void) const { return m_sprite; }
+const Hitbox&			Entity::hitbox(void) const { return m_hitbox; }
 float					Entity::hitboxRadius(void) const { return m_hitboxRadius; }
 const Color&			Entity::hitboxColor(void) const { return m_hitboxColor; }
 

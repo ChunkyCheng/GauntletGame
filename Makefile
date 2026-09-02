@@ -4,7 +4,8 @@ CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17 #-fsanitize=address
 
 HYPERBOLICS_DIR		=	Hyperbolics
-HYPERBOLICS_FILES	=	MinkowskiCoord.cpp	PoincareCoord.cpp	Hitbox.cpp
+HYPERBOLICS_FILES	=	MinkowskiCoord.cpp	PoincareCoord.cpp			KleinCoord.cpp	\
+						Hitbox.cpp
 
 ENTITIES_DIR		=	Entities
 ENTITIES_FILES		=	Entity.cpp			EntityManager.cpp			ObstacleManager.cpp \
