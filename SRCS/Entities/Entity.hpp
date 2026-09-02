@@ -6,11 +6,12 @@
 #include "raylib.h"
 #include "MinkowskiCoord.hpp"
 #include "Sprite.hpp"
+#include "Hitbox.hpp"
 
 class	Entity
 {
 	public:
-		Entity(float x, float y, Sprite sprite, float hitboxRadius);
+		Entity(float x, float y, Sprite sprite, const Hitbox& hitbox, float hitboxRadius);
 		Entity(const Entity& other);
 		Entity&	operator=(const Entity& other);
 	public:
@@ -34,10 +35,11 @@ class	Entity
 		void					setHitboxColor(const Color& color);
 
 	protected:
-		MinkowskiCoord				m_pos;
-		Sprite						m_sprite;
-		float						m_hitboxRadius;
-		Color						m_hitboxColor;
+		MinkowskiCoord	m_pos;
+		Sprite			m_sprite;
+		Hitbox			m_hitbox;
+		float			m_hitboxRadius;
+		Color			m_hitboxColor;
 };
 
 #include "Entity.tpp"

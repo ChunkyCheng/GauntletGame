@@ -12,6 +12,8 @@ Hitbox::Hitbox(float width, float height)
 	, m_height(height)
 {}
 
+Hitbox::Hitbox(const Hitbox& other) = default;
+
 Hitbox::~Hitbox(void) {}
 
 static HyperbolicRect	toHyperbolicRect(const Hitbox& hitbox, const MinkowskiCoord& pos)

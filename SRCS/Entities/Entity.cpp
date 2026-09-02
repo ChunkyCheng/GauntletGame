@@ -1,8 +1,9 @@
 #include "Entity.hpp"
 
-Entity::Entity(float x, float y, Sprite sprite, float hitboxRadius)
+Entity::Entity(float x, float y, Sprite sprite, const Hitbox& hitbox, float hitboxRadius)
 	: m_pos(x, y)
 	, m_sprite(sprite)
+	, m_hitbox(hitbox)
 	, m_hitboxRadius(hitboxRadius)
 	, m_hitboxColor(RED)
 {}
@@ -20,7 +21,7 @@ void	Entity::collisionEvent(const Entity& other)
 }
 
 
-void	Entity::updatePos(float dt) { (void)dt; }
+void	Entity::updatePos(float) {}
 void	Entity::moveX(float dist) { m_pos.moveXHyperbolic(dist); }
 void	Entity::moveY(float dist) { m_pos.moveYHyperbolic(dist); }
 void	Entity::move(float dist, float degrees) { m_pos.moveHyperbolic(dist, degrees * DEG2RAD); }
