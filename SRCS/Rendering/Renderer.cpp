@@ -29,7 +29,11 @@ void	Renderer::renderEntity(Vector2 diskCenter, float diskRadius, const Entity& 
 void	Renderer::renderEntityTextured(Vector2 diskCenter, float diskRadius, const Entity& entity)
 {
 	BeginShaderMode(*m_mapShader);
-	m_mapShader.setExtent(entity.sprite().extent);
+	Vector2 kleinExtent = {
+		std::tanh(entity.sprite().extent.x / 2) * 2,
+		std::tanh(entity.sprite().extent.y / 2) * 2
+	};
+	m_mapShader.setExtent(kleinExtent);
 	m_mapShader.setDrawMode(PoincareWarpShader::textured);
 	m_mapShader.setTextureOffset(entity.sprite().offset);
 
@@ -48,11 +52,11 @@ void	Renderer::renderEntityTextured(Vector2 diskCenter, float diskRadius, const 
 void	Renderer::renderEntityHitbox(Vector2 diskCenter, float diskRadius, const Entity& entity)
 {
 	BeginShaderMode(*m_mapShader);
-	Vector2 extent = {
+	Vector2 kleinExtent = {
 		std::tanh(entity.hitbox().width() / 2) * 2,
 		std::tanh(entity.hitbox().height() / 2) * 2
 	};
-	m_mapShader.setExtent(extent);
+	m_mapShader.setExtent(kleinExtent);
 	m_mapShader.setDrawMode(PoincareWarpShader::rectangle);
 	DrawCircle(diskCenter.x, diskCenter.y, diskRadius, entity.hitboxColor());
 	EndShaderMode();
