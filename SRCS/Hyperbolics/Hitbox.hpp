@@ -5,7 +5,7 @@
 class	Hitbox
 {
 	public:
-		Hitbox(float width, float height);
+		Hitbox(float width, float height, const KleinCoord& kleinOffset);
 		Hitbox(const Hitbox& other) = default;
 		Hitbox&	operator=(const Hitbox& other) = default;
 		~Hitbox(void) = default;

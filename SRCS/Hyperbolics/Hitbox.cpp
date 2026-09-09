@@ -13,10 +13,10 @@ struct	HyperbolicRect
 	Vector2	botRight;
 };
 
-Hitbox::Hitbox(float width, float height)
+Hitbox::Hitbox(float width, float height, const KleinCoord& kleinOffset)
 	: m_width(width)
 	, m_height(height)
-	, m_offset(0, 1)
+	, m_offset(kleinOffset.toMinkowski())
 {}
 
 bool	isPointInRect(const KleinCoord& topLeft, const KleinCoord& botRight, const KleinCoord& point)

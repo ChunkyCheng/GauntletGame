@@ -23,7 +23,7 @@ void	Renderer::renderEntity(Vector2 diskCenter, float diskRadius, const Entity& 
 	m_mapShader.setObjInvFrame(entity.pos().relativeRowX(), entity.pos().relativeRowY());
 	renderEntityTextured(diskCenter, diskRadius, entity);
 	if (m_gameState.showDebug())
-		renderEntityHitbox(diskCenter, diskRadius, entity);
+		renderEntityHitbox(diskCenter, diskRadius, entity.hitbox(), entity);
 }
 
 void	Renderer::renderEntityTextured(Vector2 diskCenter, float diskRadius, const Entity& entity)
@@ -49,13 +49,13 @@ void	Renderer::renderEntityTextured(Vector2 diskCenter, float diskRadius, const 
 	EndShaderMode();
 }
 
-void	Renderer::renderEntityHitbox(Vector2 diskCenter, float diskRadius, const Entity& entity)
+void	Renderer::renderEntityHitbox(Vector2 diskCenter, float diskRadius, const Hitbox& hitbox, const Entity& entity)
 {
 	BeginShaderMode(*m_mapShader);
 	MinkowskiCoord	pos = entity.hitbox().offset().inverseRelativeTo(entity.pos());
 	Vector2 kleinExtent = {
-		std::tanh(entity.hitbox().width() / 2) * 2,
-		std::tanh(entity.hitbox().height() / 2) * 2
+		std::tanh(hitbox.width() / 2) * 2,
+		std::tanh(hitbox.height() / 2) * 2
 	};
 	m_mapShader.setObjInvFrame(pos.relativeRowX(), pos.relativeRowY());
 	m_mapShader.setExtent(kleinExtent);

@@ -1,8 +1,9 @@
 #include "Obstacle.hpp"
 #include <cmath>
+#include "KleinCoord.hpp"
 
 Obstacle::Obstacle(float x, float y, const std::string& texturePath, float moveSpeed, float moveAngle, float hitboxRadius)
-	: Entity(x, y, {texturePath, {hitboxRadius * 1.5f, hitboxRadius * 2.0f}, {0, 0}}, Hitbox(1, 1), hitboxRadius)
+	: Entity(x, y, {texturePath, {hitboxRadius * 1.5f, hitboxRadius * 2.0f}, {0, 0}}, Hitbox(1, 1, KleinCoord(0, 0)), hitboxRadius)
 	, m_moveSpeed(moveSpeed)
 	, m_moveAngle(moveAngle)
 	, m_shouldDespawn(false)

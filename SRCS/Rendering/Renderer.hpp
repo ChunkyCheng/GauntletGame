@@ -7,6 +7,7 @@
 #include "Entity.hpp"
 
 class	GameState;
+class	Hitbox;
 
 class	Renderer
 {
@@ -19,7 +20,7 @@ class	Renderer
 		void	renderTextCentered(const std::string& text, int posX, int posY, int fontSize, Color color);
 		void	renderEntity(Vector2 diskCenter, float diskRadius, const Entity& entity);
 		void	renderEntityTextured(Vector2 diskCenter, float diskRadius, const Entity& entity);
-		void	renderEntityHitbox(Vector2 diskCenter, float diskRadius, const Entity& entity);
+		void	renderEntityHitbox(Vector2 diskCenter, float diskRadius, const Hitbox&, const Entity& entity);
 
 		template<typename T>void	renderMap(Vector2 diskCenter, float diskRadius, const T& entities);
 
