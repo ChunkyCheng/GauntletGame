@@ -8,7 +8,7 @@ GameState::GameState(void)
 	, m_gameStartTime(0)
 	, m_score(0)
 	, m_renderer(*this)
-	, m_showDebug(false)
+	, m_showDebug(true)
 {
 	std::ifstream	saveFile("save.hyperwau");
 
