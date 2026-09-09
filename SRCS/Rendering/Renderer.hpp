@@ -20,7 +20,7 @@ class	Renderer
 		void	renderEntity(Vector2 diskCenter, float diskRadius, const Entity& entity);
 		void	renderEntityTextured(Vector2 diskCenter, float diskRadius, const Entity& entity);
 		void	renderEntityHitbox(Vector2 diskCenter, float diskRadius, const Entity& entity);
-		
+
 		template<typename T>void	renderMap(Vector2 diskCenter, float diskRadius, const T& entities);
 
 	protected:
@@ -28,8 +28,6 @@ class	Renderer
 		const GameState&	m_gameState;
 		TextureManager		m_textureManager;
 		PoincareWarpShader	m_mapShader;
-
-		
 };
 
 #include "Renderer.tpp"

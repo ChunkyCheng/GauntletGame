@@ -16,6 +16,7 @@ struct	HyperbolicRect
 Hitbox::Hitbox(float width, float height)
 	: m_width(width)
 	, m_height(height)
+	, m_offset(0, 1)
 {}
 
 bool	isPointInRect(const KleinCoord& topLeft, const KleinCoord& botRight, const KleinCoord& point)
@@ -51,8 +52,10 @@ bool	geodesicIntersects(const MinkowskiCoord& p1, const MinkowskiCoord& p2, cons
 	return false;
 }
 
-bool	Hitbox::collides(const MinkowskiCoord& pos, const Hitbox& other, const MinkowskiCoord& otherPos) const
+bool	Hitbox::collides(const MinkowskiCoord& posOri, const Hitbox& other, const MinkowskiCoord& otherPosOri) const
 {
+	MinkowskiCoord pos = m_offset.inverseRelativeTo(posOri);
+	MinkowskiCoord otherPos = other.m_offset.inverseRelativeTo(otherPosOri);
 	KleinCoord	kleinTopRight(std::tanh(width() / 2), std::tanh(height() / 2));
 
 	KleinCoord	otherKleinCorner(std::tanh(other.width() / 2), std::tanh(other.height() / 2));
@@ -90,5 +93,6 @@ bool	Hitbox::collides(const MinkowskiCoord& pos, const Hitbox& other, const Mink
 	return false;
 }
 
-float	Hitbox::width(void) const { return m_width; }
-float	Hitbox::height(void) const { return m_height; }
+float					Hitbox::width(void) const { return m_width; }
+float					Hitbox::height(void) const { return m_height; }
+const MinkowskiCoord&	Hitbox::offset(void) const { return m_offset; }

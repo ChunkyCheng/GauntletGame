@@ -1,6 +1,6 @@
 #pragma once
 
-class	MinkowskiCoord;
+#include "MinkowskiCoord.hpp"
 
 class	Hitbox
 {
@@ -12,11 +12,13 @@ class	Hitbox
 
 		bool	collides(const MinkowskiCoord& pos, const Hitbox& other, const MinkowskiCoord& otherPos) const;
 
-		float	width(void) const;
-		float	height(void) const;
+		float					width(void) const;
+		float					height(void) const;
+		const MinkowskiCoord&	offset(void) const;
 		
 	private:
-		const float	m_width;
-		const float	m_height;
+		const float				m_width;
+		const float				m_height;
+		const MinkowskiCoord	m_offset;
 };
 

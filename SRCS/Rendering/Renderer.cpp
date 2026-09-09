@@ -52,10 +52,12 @@ void	Renderer::renderEntityTextured(Vector2 diskCenter, float diskRadius, const 
 void	Renderer::renderEntityHitbox(Vector2 diskCenter, float diskRadius, const Entity& entity)
 {
 	BeginShaderMode(*m_mapShader);
+	MinkowskiCoord	pos = entity.hitbox().offset().inverseRelativeTo(entity.pos());
 	Vector2 kleinExtent = {
 		std::tanh(entity.hitbox().width() / 2) * 2,
 		std::tanh(entity.hitbox().height() / 2) * 2
 	};
+	m_mapShader.setObjInvFrame(pos.relativeRowX(), pos.relativeRowY());
 	m_mapShader.setExtent(kleinExtent);
 	m_mapShader.setDrawMode(PoincareWarpShader::rectangle);
 	DrawCircle(diskCenter.x, diskCenter.y, diskRadius, entity.hitboxColor());
