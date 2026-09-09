@@ -2,7 +2,7 @@
 
 #include "Entity.hpp"
 
-constexpr float	PLAYER_MOVE_DIST = 2;
+constexpr float	PLAYER_MOVE_DIST = 3;
 
 class	Player : public Entity
 {
