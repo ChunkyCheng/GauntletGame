@@ -9,8 +9,7 @@ Player::Player(void)
 	: Entity(
 		0, 0,
 		{static_cast<std::string>(PLAYER_TEXTURE), {0.5, 0.5}, {0, 0.04}},
-		Hitbox(0.4, 0.4, KleinCoord(0, 0)),	
-		0.2
+		Hitbox(0.3, 0.3, KleinCoord(0, 0))
 	)
 	, m_isAlive(true)
 {

@@ -1,10 +1,9 @@
 #include "Entity.hpp"
 
-Entity::Entity(float x, float y, Sprite sprite, const Hitbox& hitbox, float hitboxRadius)
+Entity::Entity(float x, float y, Sprite sprite, const Hitbox& hitbox)
 	: m_pos(x, y)
 	, m_sprite(sprite)
 	, m_hitbox(hitbox)
-	, m_hitboxRadius(hitboxRadius)
 	, m_hitboxColor(RED)
 {}
 
@@ -32,7 +31,6 @@ void	Entity::move(float dist, float degrees) { m_pos.moveHyperbolic(dist, degree
 const MinkowskiCoord&	Entity::pos(void) const { return m_pos; }
 const Sprite&			Entity::sprite(void) const { return m_sprite; }
 const Hitbox&			Entity::hitbox(void) const { return m_hitbox; }
-float					Entity::hitboxRadius(void) const { return m_hitboxRadius; }
 const Color&			Entity::hitboxColor(void) const { return m_hitboxColor; }
 
 void					Entity::setHitboxColor(const Color& color) { m_hitboxColor = color; }

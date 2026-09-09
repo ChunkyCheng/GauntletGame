@@ -11,7 +11,7 @@
 class	Entity
 {
 	public:
-		Entity(float x, float y, Sprite sprite, const Hitbox& hitbox, float hitboxRadius);
+		Entity(float x, float y, Sprite sprite, const Hitbox& hitbox);
 		Entity(const Entity& other);
 		Entity&	operator=(const Entity& other);
 	public:
@@ -30,7 +30,6 @@ class	Entity
 		bool					hasTexture(void) const;
 		const Sprite&			sprite(void) const;
 		const Hitbox&			hitbox(void) const;
-		float					hitboxRadius(void) const;
 		const Color&			hitboxColor(void) const;
 
 		void					setHitboxColor(const Color& color);
@@ -39,7 +38,6 @@ class	Entity
 		MinkowskiCoord	m_pos;
 		Sprite			m_sprite;
 		Hitbox			m_hitbox;
-		float			m_hitboxRadius;
 		Color			m_hitboxColor;
 };
 
