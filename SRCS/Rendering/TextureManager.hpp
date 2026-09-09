@@ -8,6 +8,7 @@ constexpr std::string_view MISSING_TEXTURE			= "textures/undefined.png";
 constexpr std::string_view PLAYER_TEXTURE			= "textures/wau.png";
 constexpr std::string_view HELICOPTER_LEFT_TEXTURE	= "textures/helicopter-left.png";
 constexpr std::string_view HELICOPTER_RIGHT_TEXTURE	= "textures/helicopter-right.png";
+constexpr std::string_view CLOUD_TEXTURE			= "textures/cloud-transparent.png";
 
 class	TextureManager
 {

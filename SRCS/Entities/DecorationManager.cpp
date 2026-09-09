@@ -1,6 +1,7 @@
 #include "DecorationManager.hpp"
 #include <random>
 #include "PoincareCoord.hpp"
+#include "TextureManager.hpp"
 
 DecorationManager::DecorationManager(void)
 	: EntityManager(1, 1)
@@ -18,5 +19,5 @@ void	DecorationManager::spawnRandom(void)
 	angle += 2 / (std::rand() % 10 + 1) - 1;
 	float	speed = (std::rand() % 5) / 4 * 0.2 + 0.3;
 	float	size = (std::rand() % 10) / 9 * 0.2 + 0.1;
-	m_entities.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), "textures/cloud-transparent.png", speed, angle, size));
+	m_entities.push_back(std::make_unique<Obstacle>(pos.x(), pos.y(), static_cast<std::string>(CLOUD_TEXTURE), speed, angle, size));
 }

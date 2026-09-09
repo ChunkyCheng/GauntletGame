@@ -1,11 +1,12 @@
 #include "TextureManager.hpp"
 #include <array>
 
-constexpr std::array<std::string_view, 4> DEFAULT_PATHS = {
+constexpr std::array<std::string_view, 5> DEFAULT_PATHS = {
 	MISSING_TEXTURE,
 	PLAYER_TEXTURE,
 	HELICOPTER_LEFT_TEXTURE,
-	HELICOPTER_RIGHT_TEXTURE
+	HELICOPTER_RIGHT_TEXTURE,
+	CLOUD_TEXTURE
 };
 
 TextureManager::TextureManager(void)
