@@ -3,12 +3,13 @@
 #include "KleinCoord.hpp"
 
 Obstacle::Obstacle(float x, float y, const std::string& texturePath, float moveSpeed, float moveAngle, float hitboxRadius)
-	: Entity(x, y, {texturePath, {hitboxRadius * 1.5f, hitboxRadius * 2.0f}, {0, 0}}, Hitbox(1, 1, KleinCoord(0, 0)))
+	: Entity(x, y, {texturePath, {1.0f, 1.5f}, {0, -0.15}}, Hitbox(1, 0.8, KleinCoord(0, 0)))
 	, m_moveSpeed(moveSpeed)
 	, m_moveAngle(moveAngle)
 	, m_shouldDespawn(false)
 	, m_sfx(LoadMusicStream("sfx/helicopter.mp3"))
 {
+	(void)hitboxRadius;
 	float angleRad = moveAngle * DEG2RAD;
 	m_moveVector = {
 		std::sin(angleRad) * moveSpeed,
