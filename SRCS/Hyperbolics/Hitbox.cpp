@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cmath>
 #include <array>
+#include "raylib.h"
+#include "raymath.h"
 #include "MinkowskiCoord.hpp"
 #include "KleinCoord.hpp"
 
@@ -23,24 +25,6 @@ bool	isPointInRect(const KleinCoord& topLeft, const KleinCoord& botRight, const 
 	return false;
 }
 
-Vector3	crossProduct(const MinkowskiCoord& a, const MinkowskiCoord& b)
-{
-	return {
-		a.y() * b.z() - a.z() * b.y(),
-		a.z() * b.x() - a.x() * b.z(),
-		a.x() * b.y() - a.y() * b.x()
-	};
-}
-
-Vector3	crossProduct(const Vector3& a, const Vector3& b)
-{
-	return {
-		a.y * b.z - a.z * b.y,
-		a.z * b.x - a.x * b.z,
-		a.x * b.y - a.y * b.x
-	};
-}
-
 float	innerProduct(const MinkowskiCoord& a, const MinkowskiCoord& b)
 {
 	return a.z() * b.z() - a.y() * b.y() - a.x() * b.x();
@@ -48,9 +32,9 @@ float	innerProduct(const MinkowskiCoord& a, const MinkowskiCoord& b)
 
 bool	geodesicIntersects(const MinkowskiCoord& p1, const MinkowskiCoord& p2, const MinkowskiCoord& q1, const MinkowskiCoord q2)
 {
-	Vector3	crossProductP = crossProduct(p1, p2);
-	Vector3 crossProductQ = crossProduct(q1, q2);
-	Vector3	pxq = crossProduct(crossProductP, crossProductQ);
+	Vector3	crossProductP = Vector3CrossProduct(p1.vector(), p2.vector());
+	Vector3 crossProductQ = Vector3CrossProduct(q1.vector(), q2.vector());
+	Vector3	pxq = Vector3CrossProduct(crossProductP, crossProductQ);
 	float	pxqInnerProduct = pxq.z * pxq.z - pxq.y * pxq.y - pxq.x * pxq.x;
 
 	if (pxqInnerProduct <= 0)
